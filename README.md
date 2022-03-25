@@ -5,3 +5,6 @@
   
 ## Project is created with:
 * C++
+
+## Dependencies
+* spdlog
