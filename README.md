@@ -5,4 +5,3 @@
   
 ## Project is created with:
 * C++
-* 
