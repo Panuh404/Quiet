@@ -1,5 +1,5 @@
+#include "Quiet_pch.h"
 #include "Log.h"
-
 #include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace Quiet {
