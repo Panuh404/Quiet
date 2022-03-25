@@ -1,3 +1,9 @@
 [submodule "Quiet/Dependencies/spdlog"]
 	path = Quiet/Dependencies/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Quiet/Dependences/GLFW"]
+	path = Quiet/Dependences/GLFW
+	url = https://github.com/TheCherno/glfw
+[submodule "Quiet/Dependencies/GLFW"]
+	path = Quiet/Dependencies/GLFW
+	url = https://github.com/TheCherno/glfw
