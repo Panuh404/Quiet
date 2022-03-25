@@ -7,4 +7,5 @@
 * C++
 
 ## Dependencies
+* GLFW
 * spdlog
