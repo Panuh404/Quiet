@@ -5,7 +5,12 @@
 
 namespace Quiet {
 	
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application() {
+		QT_ASSERT(!s_Instance, "Application already exist!");
+		s_Instance = this;
+		
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 	}

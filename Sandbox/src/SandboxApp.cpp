@@ -17,6 +17,7 @@ class Sandbox : public Quiet::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Quiet::ImGuiLayer());
 	}
 	
 	~Sandbox() {

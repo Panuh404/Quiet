@@ -13,6 +13,9 @@
     <Filter Include="Quiet\Events">
       <UniqueIdentifier>{B164BA3F-9DC7-49E4-464D-829A328F1567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quiet\ImGui">
+      <UniqueIdentifier>{57C80248-C37D-7B3D-4C72-7514B8267241}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
@@ -40,6 +43,9 @@
     <ClInclude Include="src\Quiet\Events\MouseEvent.h">
       <Filter>Quiet\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quiet\ImGui\ImGuiLayer.h">
+      <Filter>Quiet\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quiet\Layer.h">
       <Filter>Quiet</Filter>
     </ClInclude>
@@ -53,6 +59,7 @@
       <Filter>Quiet</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet_pch.h" />
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
@@ -60,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="src\Quiet\Application.cpp">
       <Filter>Quiet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\ImGui\ImGuiLayer.cpp">
+      <Filter>Quiet\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Layer.cpp">
       <Filter>Quiet</Filter>
@@ -71,5 +81,6 @@
       <Filter>Quiet</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet_pch.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
   </ItemGroup>
 </Project>
