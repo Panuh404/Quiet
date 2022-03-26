@@ -8,4 +8,6 @@
 
 ## Dependencies
 * GLFW
+* Glad
 * spdlog
+* ImGui
