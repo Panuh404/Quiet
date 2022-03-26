@@ -79,8 +79,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Quiet_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;GLFW_INCLUDE_NONE;QUIET_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;QUIET_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -102,8 +102,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Quiet_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;GLFW_INCLUDE_NONE;QUIET_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;QUIET_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -129,8 +129,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Quiet_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;GLFW_INCLUDE_NONE;QUIET_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;QUIET_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -161,6 +161,8 @@
     <ClInclude Include="src\Quiet\Events\Event.h" />
     <ClInclude Include="src\Quiet\Events\KeyEvent.h" />
     <ClInclude Include="src\Quiet\Events\MouseEvent.h" />
+    <ClInclude Include="src\Quiet\Layer.h" />
+    <ClInclude Include="src\Quiet\LayerStack.h" />
     <ClInclude Include="src\Quiet\Log.h" />
     <ClInclude Include="src\Quiet\Window.h" />
     <ClInclude Include="src\Quiet_pch.h" />
@@ -168,6 +170,8 @@
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Quiet\Application.cpp" />
+    <ClCompile Include="src\Quiet\Layer.cpp" />
+    <ClCompile Include="src\Quiet\LayerStack.cpp" />
     <ClCompile Include="src\Quiet\Log.cpp" />
     <ClCompile Include="src\Quiet_pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -176,6 +180,9 @@
   <ItemGroup>
     <ProjectReference Include="Dependencies\GLFW\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Dependencies\Glad\Glad.vcxproj">
+      <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

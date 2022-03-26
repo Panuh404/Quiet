@@ -9,11 +9,13 @@ workspace "Quiet"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	
--- Include directories relative to root folder (solution directory)
+--include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Quiet/Dependencies/GLFW/include"
-	
+IncludeDir["Glad"] = "Quiet/Dependencies/Glad/include"
+
 include "Quiet/Dependencies/GLFW"
+include "Quiet/Dependencies/Glad"
 	
 project "Quiet"
 	location "Quiet"
@@ -34,12 +36,14 @@ project "Quiet"
 	includedirs{
 		"%{prj.name}/src",
 		"%{prj.name}/Dependencies/spdlog/include",
-		"%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 	
 	links{
 		"GLFW",
-		"opengl32.lib"
+		"Glad",
+        "opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -49,8 +53,7 @@ project "Quiet"
 
 		defines{
 			"QUIET_PLATFORM_WINDOWS",
-			"QUIET_BUILD_DLL",
-            "GLFW_INCLUDE_NONE"
+			"QUIET_BUILD_DLL"
 		}
 		
 		postbuildcommands{
@@ -104,18 +107,17 @@ project "Sandbox"
 			"QUIET_PLATFORM_WINDOWS"
 		}
 		
-		filter "configurations:Debug"
-			defines "QUIET_DEBUG"
-			buildoptions "/MDd"
-			symbols "On"
+    filter "configurations:Debug"
+        defines "QUIET_DEBUG"
+        buildoptions "/MDd"
+        symbols "On"
 
-		filter "configurations:Release"
-			defines "QUIET_RELEASE"
-			buildoptions "/MD"
-			optimize "On"
+    filter "configurations:Release"
+        defines "QUIET_RELEASE"
+        buildoptions "/MD"
+        optimize "On"
 
-		filter "configurations:Dist"
-			defines "QUIET_DIST"
-			buildoptions "/MD"
-			optimize "On"
-			
+    filter "configurations:Dist"
+        defines "QUIET_DIST"
+        buildoptions "/MD"
+        optimize "On"
