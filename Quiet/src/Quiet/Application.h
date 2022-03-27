@@ -10,20 +10,18 @@
 
 namespace Quiet {
 	
-	class QUIET_API Application
-	{
+	class QUIET_API Application {
 	public:
 		Application();
 		virtual ~Application();
 		
 		void Run();
 		void OnEvent(Event& event);
-		
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
-		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
+		inline static Application& Get() { return *s_Instance; }
 		
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
@@ -31,8 +29,7 @@ namespace Quiet {
 		std::unique_ptr<Window> m_Window;
 		LayerStack m_LayerStack;
 		bool m_Running = true;
-	
-	private:
+
 		static Application* s_Instance;
 	};
 	

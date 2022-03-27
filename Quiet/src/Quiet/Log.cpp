@@ -8,7 +8,10 @@ namespace Quiet {
 	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
 
 	void Log::Init() {
+		// Set Format of the Logging 
 		spdlog::set_pattern("%^[%T] %n::%v%$");
+
+		// Logger Parameters
 		s_CoreLogger = spdlog::stdout_color_mt("QUIET");
 		s_CoreLogger->set_level(spdlog::level::trace);
 		

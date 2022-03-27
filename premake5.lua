@@ -1,6 +1,7 @@
 workspace "Quiet"
     architecture "x64"
-
+	startproject "Sandbox"
+	
     configurations{
 		"Debug",
 		"Release",
@@ -18,11 +19,12 @@ IncludeDir["ImGui"] = "Quiet/Dependencies/ImGui"
 include "Quiet/Dependencies/GLFW"
 include "Quiet/Dependencies/Glad"
 include "Quiet/Dependencies/ImGui"
-	
+
 project "Quiet"
 	location "Quiet"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -52,31 +54,31 @@ project "Quiet"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines{
 			"QUIET_PLATFORM_WINDOWS",
-			"QUIET_BUILD_DLL"
+			"QUIET_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 		
 		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
     filter "configurations:Debug"
         defines "QUIET_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "QUIET_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "QUIET_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     
@@ -84,6 +86,7 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -104,7 +107,6 @@ project "Sandbox"
 	
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines{
@@ -113,15 +115,15 @@ project "Sandbox"
 		
     filter "configurations:Debug"
         defines "QUIET_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "QUIET_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "QUIET_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"

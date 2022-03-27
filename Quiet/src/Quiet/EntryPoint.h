@@ -7,8 +7,8 @@ extern Quiet::Application* Quiet::CreateApplication();
 int main(int argc, char** argv) {
 	
 	Quiet::Log::Init();
-	QT_CORE_WARN("Initialized Log!");
-	QT_INFO("Welcome!");
+	QUIET_CORE_WARN("Initialized Log!");
+	QUIET_INFO("Welcome!");
 	
 	auto app = Quiet::CreateApplication();
 	app->Run();

@@ -5,11 +5,11 @@ public:
 	ExampleLayer() : Layer("Example") {}
 	
 	void OnUpdate() override {
-		//QT_INFO("ExampleLayer::Update");
+		// QT_INFO("ExampleLayer::Update");
 	}
 	
 	void OnEvent(Quiet::Event& event) override {
-		QT_TRACE("{0}", event);
+		// QUIET_TRACE("{0}", event);
 	}
 };
 
