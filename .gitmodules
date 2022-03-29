@@ -9,7 +9,7 @@
 	url = https://github.com/glfw/glfw.git
 [submodule "Quiet/Dependencies/ImGui"]
 	path = Quiet/Dependencies/ImGui
-	url = https://github.com/ocornut/imgui.git
+	url = https://github.com/ocornut/imgui
 	branch = docking
 [submodule "Quiet/Dependencies/glm"]
 	path = Quiet/Dependencies/glm

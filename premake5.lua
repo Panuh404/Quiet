@@ -1,12 +1,12 @@
 workspace "Quiet"
-    architecture "x64"
+	architecture "x64"
 	startproject "Sandbox"
 	
-    configurations{
+	configurations{
 		"Debug",
 		"Release",
 		"Dist"
-    }
+	}
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	
@@ -23,9 +23,10 @@ include "Quiet/Dependencies/ImGui"
 
 project "Quiet"
 	location "Quiet"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -35,13 +36,15 @@ project "Quiet"
 
 	files{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs{
 		"%{prj.name}/src",
 		"%{prj.name}/Dependencies/spdlog/include",
-        "%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}"
@@ -51,11 +54,10 @@ project "Quiet"
 		"GLFW",
 		"Glad",
 		"ImGui",
-        "opengl32.lib"
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines{
@@ -63,32 +65,29 @@ project "Quiet"
 			"QUIET_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
-		
-		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
 
-    filter "configurations:Debug"
-        defines "QUIET_DEBUG"
-        runtime "Debug"
-        symbols "On"
+	filter "configurations:Debug"
+		defines "QUIET_DEBUG"
+		runtime "Debug"
+		symbols "on"
 
-    filter "configurations:Release"
-        defines "QUIET_RELEASE"
-        runtime "Release"
-        optimize "On"
+	filter "configurations:Release"
+		defines "QUIET_RELEASE"
+		runtime "Release"
+		optimize "on"
 
-    filter "configurations:Dist"
-        defines "QUIET_DIST"
-        runtime "Release"
-        optimize "On"
+	filter "configurations:Dist"
+		defines "QUIET_DIST"
+		runtime "Release"
+		optimize "on"
 
-    
+
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -101,6 +100,7 @@ project "Sandbox"
 	includedirs{
 		"Quiet/Dependencies/spdlog/include",
 		"Quiet/src",
+		"Quiet/Dependencies/",
 		"%{IncludeDir.glm}"
 	}
 	
@@ -109,24 +109,23 @@ project "Sandbox"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines{
 			"QUIET_PLATFORM_WINDOWS"
 		}
 		
-    filter "configurations:Debug"
-        defines "QUIET_DEBUG"
-        runtime "Debug"
-        symbols "On"
+	filter "configurations:Debug"
+		defines "QUIET_DEBUG"
+		runtime "Debug"
+		symbols "on"
 
-    filter "configurations:Release"
-        defines "QUIET_RELEASE"
-        runtime "Release"
-        optimize "On"
+	filter "configurations:Release"
+		defines "QUIET_RELEASE"
+		runtime "Release"
+		optimize "on"
 
-    filter "configurations:Dist"
-        defines "QUIET_DIST"
-        runtime "Release"
-        optimize "On"
+	filter "configurations:Dist"
+		defines "QUIET_DIST"
+		runtime "Release" 
+		optimize "on"

@@ -52,6 +52,9 @@
     <ClInclude Include="src\Quiet\Input.h">
       <Filter>Quiet</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quiet\KeyCodes.h">
+      <Filter>Quiet</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quiet\Layer.h">
       <Filter>Quiet</Filter>
     </ClInclude>
@@ -61,12 +64,13 @@
     <ClInclude Include="src\Quiet\Log.h">
       <Filter>Quiet</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quiet\MouseCodes.h">
+      <Filter>Quiet</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quiet\Window.h">
       <Filter>Quiet</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet_pch.h" />
-    <ClInclude Include="src\Quiet\KeyCodes.h" />
-    <ClInclude Include="src\Quiet\MouseCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -77,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="src\Quiet\Application.cpp">
       <Filter>Quiet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\ImGui\ImGuiBuild.cpp">
+      <Filter>Quiet\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\ImGui\ImGuiLayer.cpp">
       <Filter>Quiet\ImGui</Filter>

@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef QUIET_PLATFORM_WINDOWS
+#if QUIET_DYNAMIC_LINK
 	#ifdef QUIET_BUILD_DLL
 		#define QUIET_API __declspec(dllexport)
 	#else
 		#define QUIET_API __declspec(dllimport)
 	#endif
+#else
+	#define QUIET_API	
+#endif
 #else
 	#error Quiet only supports Windows!
 #endif

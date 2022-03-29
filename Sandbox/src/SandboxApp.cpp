@@ -1,5 +1,7 @@
 #include "Quiet.h"
 
+#include "ImGui/imgui.h"
+
 class ExampleLayer : public Quiet::Layer {
 public:
 	ExampleLayer() : Layer("Example") {}
@@ -8,6 +10,12 @@ public:
 		if (Quiet::Input::IsKeyPressed(Quiet::Key::Tab)) {
 			QUIET_TRACE("Tab Key Pressed");
 		}
+	}
+	
+	void OnImGuiRender() override {
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 	
 	void OnEvent(Quiet::Event& event) override {

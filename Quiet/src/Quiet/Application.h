@@ -7,6 +7,7 @@
 #include "Quiet/Events/Event.h"
 #include "Quiet/Events/ApplicationEvent.h"
 
+#include "Quiet/ImGui/ImGuiLayer.h"
 
 namespace Quiet {
 	
@@ -27,6 +28,7 @@ namespace Quiet {
 		bool OnWindowClose(WindowCloseEvent& event);
 		
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 		bool m_Running = true;
 

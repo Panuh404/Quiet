@@ -1,7 +1,8 @@
 #pragma once
 
-// QUIET PRECOMPILED HEADERS
-
+//-----------------------------------------------------------------------------
+// [SECTION] QUIET PRECOMPILED HEADERS
+//-----------------------------------------------------------------------------
 #include <iostream>
 #include <memory>
 #include <utility>
