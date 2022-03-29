@@ -7,8 +7,10 @@
 * C++
 
 ## Dependencies
+* Premake
 * GLFW
 * Glad
 * spdlog
 * ImGui
+* glm
 

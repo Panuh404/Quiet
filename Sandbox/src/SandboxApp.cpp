@@ -5,11 +5,16 @@ public:
 	ExampleLayer() : Layer("Example") {}
 	
 	void OnUpdate() override {
-		// QT_INFO("ExampleLayer::Update");
+		if (Quiet::Input::IsKeyPressed(Quiet::Key::Tab)) {
+			QUIET_TRACE("Tab Key Pressed");
+		}
 	}
 	
 	void OnEvent(Quiet::Event& event) override {
-		// QUIET_TRACE("{0}", event);
+		if (event.GetEventType() == Quiet::EventType::KeyPressed) {
+			Quiet::KeyPressedEvent& e = (Quiet::KeyPressedEvent&)event;
+			QUIET_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 
@@ -17,7 +22,6 @@ class Sandbox : public Quiet::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Quiet::ImGuiLayer());
 	}
 	
 	~Sandbox() {

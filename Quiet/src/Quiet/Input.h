@@ -2,6 +2,7 @@
 
 #include "Quiet/Core.h"
 #include "Quiet/Events/Event.h"
+#include "Quiet/Events/KeyEvent.h"
 
 namespace Quiet {
 	

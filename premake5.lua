@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Quiet/Dependencies/GLFW/include"
 IncludeDir["Glad"] = "Quiet/Dependencies/Glad/include"
 IncludeDir["ImGui"] = "Quiet/Dependencies/ImGui"
+IncludeDir["glm"] = "Quiet/Dependencies/glm"
 
 include "Quiet/Dependencies/GLFW"
 include "Quiet/Dependencies/Glad"
@@ -42,7 +43,8 @@ project "Quiet"
 		"%{prj.name}/Dependencies/spdlog/include",
         "%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links{
@@ -98,7 +100,8 @@ project "Sandbox"
 	
 	includedirs{
 		"Quiet/Dependencies/spdlog/include",
-		"Quiet/src"
+		"Quiet/src",
+		"%{IncludeDir.glm}"
 	}
 	
 	links{

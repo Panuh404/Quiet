@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>Quiet_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;GLFW_INCLUDE_NONE;QUIET_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;Dependencies\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;Dependencies\ImGui;Dependencies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -102,7 +102,7 @@
       <PrecompiledHeaderFile>Quiet_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;GLFW_INCLUDE_NONE;QUIET_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;Dependencies\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;Dependencies\ImGui;Dependencies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -128,7 +128,7 @@
       <PrecompiledHeaderFile>Quiet_pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>QUIET_PLATFORM_WINDOWS;QUIET_BUILD_DLL;GLFW_INCLUDE_NONE;QUIET_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;Dependencies\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;Dependencies\spdlog\include;Dependencies\GLFW\include;Dependencies\Glad\include;Dependencies\ImGui;Dependencies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -149,7 +149,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Quiet.h" />
@@ -162,14 +161,15 @@
     <ClInclude Include="src\Quiet\Events\MouseEvent.h" />
     <ClInclude Include="src\Quiet\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Quiet\Input.h" />
+    <ClInclude Include="src\Quiet\KeyCodes.h" />
     <ClInclude Include="src\Quiet\Layer.h" />
     <ClInclude Include="src\Quiet\LayerStack.h" />
     <ClInclude Include="src\Quiet\Log.h" />
+    <ClInclude Include="src\Quiet\MouseCodes.h" />
     <ClInclude Include="src\Quiet\Window.h" />
     <ClInclude Include="src\Quiet_pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Quiet\Application.cpp" />
