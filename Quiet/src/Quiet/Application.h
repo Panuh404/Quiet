@@ -10,10 +10,11 @@
 #include "Quiet/ImGui/ImGuiLayer.h"
 
 #include "Quiet/Renderer/Shader.h"
+#include "Quiet/Renderer/Buffer.h"
 
 namespace Quiet {
 	
-	class QUIET_API Application {
+	class Application {
 	public:
 		Application();
 		virtual ~Application();
@@ -35,9 +36,9 @@ namespace Quiet {
 		bool m_Running = true;
 
 		unsigned int m_VertexArray;
-		unsigned int m_VertexBuffer;
-		unsigned int m_IndexBuffer;
 		std::unique_ptr<Shader> m_Shader;
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 
 	private:
 		static Application* s_Instance;

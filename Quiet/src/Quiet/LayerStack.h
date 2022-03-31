@@ -7,7 +7,7 @@
 
 namespace Quiet {
 	
-	class QUIET_API LayerStack {
+	class LayerStack {
 	public:
 		LayerStack();
 		~LayerStack();

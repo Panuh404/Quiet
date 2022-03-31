@@ -3,7 +3,7 @@
 
 namespace Quiet {
 	
-	class QUIET_API KeyEvent : public Event {
+	class KeyEvent : public Event {
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
@@ -13,7 +13,7 @@ namespace Quiet {
 		int m_KeyCode;
 	};
 
-	class QUIET_API KeyPressedEvent : public KeyEvent {
+	class KeyPressedEvent : public KeyEvent {
 	public:
 		KeyPressedEvent(int keyCode, int repeatCount) : KeyEvent(keyCode), m_RepeatCount(repeatCount) {}
 		inline int GetRepeatCount() const { return m_RepeatCount; }
@@ -29,7 +29,7 @@ namespace Quiet {
 		int m_RepeatCount;
 	};
 
-	class QUIET_API KeyReleasedEvent : public KeyEvent {
+	class KeyReleasedEvent : public KeyEvent {
 	public:
 		KeyReleasedEvent(int keyCode) : KeyEvent(keyCode) {}
 
@@ -41,7 +41,7 @@ namespace Quiet {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class QUIET_API KeyTypedEvent : public KeyEvent {
+	class KeyTypedEvent : public KeyEvent {
 	public:
 		KeyTypedEvent(int keyCode) : KeyEvent(keyCode) {}
 
