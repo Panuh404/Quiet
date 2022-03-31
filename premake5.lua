@@ -12,14 +12,14 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	
 --include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "Quiet/Dependencies/GLFW/include"
-IncludeDir["Glad"] = "Quiet/Dependencies/Glad/include"
-IncludeDir["ImGui"] = "Quiet/Dependencies/ImGui"
-IncludeDir["glm"] = "Quiet/Dependencies/glm"
+IncludeDir["GLFW"] = "Quiet/vendor/GLFW/include"
+IncludeDir["Glad"] = "Quiet/vendor/Glad/include"
+IncludeDir["ImGui"] = "Quiet/vendor/ImGui"
+IncludeDir["glm"] = "Quiet/vendor/glm"
 
-include "Quiet/Dependencies/GLFW"
-include "Quiet/Dependencies/Glad"
-include "Quiet/Dependencies/ImGui"
+include "Quiet/vendor/GLFW"
+include "Quiet/vendor/Glad"
+include "Quiet/vendor/ImGui"
 
 project "Quiet"
 	location "Quiet"
@@ -41,9 +41,15 @@ project "Quiet"
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
+	}
+
 	includedirs{
 		"%{prj.name}/src",
-		"%{prj.name}/Dependencies/spdlog/include",
+		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
@@ -62,8 +68,7 @@ project "Quiet"
 
 		defines{
 			"QUIET_PLATFORM_WINDOWS",
-			"QUIET_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"QUIET_BUILD_DLL"
 		}
 
 	filter "configurations:Debug"
@@ -98,9 +103,9 @@ project "Sandbox"
 	}
 	
 	includedirs{
-		"Quiet/Dependencies/spdlog/include",
+		"Quiet/vendor/spdlog/include",
 		"Quiet/src",
-		"Quiet/Dependencies/",
+		"Quiet/vendor/",
 		"%{IncludeDir.glm}"
 	}
 	

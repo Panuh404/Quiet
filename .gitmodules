@@ -1,16 +1,16 @@
-[submodule "Quiet/Dependencies/spdlog"]
-	path = Quiet/Dependencies/spdlog
+[submodule "Quiet/vendor/spdlog"]
+	path = Quiet/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "Quiet/Dependences/GLFW"]
-	path = Quiet/Dependences/GLFW
+[submodule "Quiet/vendor/GLFW"]
+	path = Quiet/vendor/GLFW
 	url = https://github.com/glfw/glfw.git
-[submodule "Quiet/Dependencies/GLFW"]
-	path = Quiet/Dependencies/GLFW
+[submodule "Quiet/vendor/GLFW"]
+	path = Quiet/vendor/GLFW
 	url = https://github.com/glfw/glfw.git
-[submodule "Quiet/Dependencies/ImGui"]
-	path = Quiet/Dependencies/ImGui
+[submodule "Quiet/vendor/ImGui"]
+	path = Quiet/vendor/ImGui
 	url = https://github.com/ocornut/imgui
 	branch = docking
-[submodule "Quiet/Dependencies/glm"]
-	path = Quiet/Dependencies/glm
+[submodule "Quiet/vendor/glm"]
+	path = Quiet/vendor/glm
 	url = https://github.com/g-truc/glm.git

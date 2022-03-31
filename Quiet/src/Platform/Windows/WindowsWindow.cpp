@@ -5,7 +5,7 @@
 #include "Quiet/Events/MouseEvent.h"
 #include "Quiet/Events/KeyEvent.h"
 
-#include "Quiet/Renderer/OpenGLContext.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Quiet {
 
