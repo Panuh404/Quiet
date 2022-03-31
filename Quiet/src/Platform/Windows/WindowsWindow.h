@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Quiet/Window.h"
+#include "Quiet/Renderer/GraphicsContext.h"
 
-struct GLFWwindow;
+#include <GLFW/glfw3.h>
 
 namespace Quiet {
 	
@@ -30,6 +31,7 @@ namespace Quiet {
 		
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData {
 			std::string Title;
