@@ -9,18 +9,18 @@ namespace Quiet {
 
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size) {
 		switch (Renderer::GetAPI()) {
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			QUIET_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexBuffer(vertices, size);
 
-		case RendererAPI::Vulkan:
+		case RendererAPI::API::Vulkan:
 			QUIET_CORE_ASSERT(false, "RendererAPI::Vulkan is currently not supported!");
 			return nullptr;
 
-		case RendererAPI::Direct3D:
+		case RendererAPI::API::Direct3D:
 			QUIET_CORE_ASSERT(false, "RendererAPI::Direct3D is currently not supported!");
 			return nullptr;
 		}
@@ -30,18 +30,18 @@ namespace Quiet {
 
 	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size) {
 		switch (Renderer::GetAPI()) {
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			QUIET_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
 			return nullptr;
 
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLIndexBuffer(indices, size);
 
-		case RendererAPI::Vulkan:
+		case RendererAPI::API::Vulkan:
 			QUIET_CORE_ASSERT(false, "RendererAPI::Vulkan is currently not supported!");
 			return nullptr;
 
-		case RendererAPI::Direct3D:
+		case RendererAPI::API::Direct3D:
 			QUIET_CORE_ASSERT(false, "RendererAPI::Direct3D is currently not supported!");
 			return nullptr;
 		}

@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Input.h"
 
-#include "glad/glad.h"
+#include "Quiet/Renderer/Renderer.h"
 
 namespace Quiet {
 	
@@ -149,29 +149,25 @@ namespace Quiet {
 	
 	void Application::Run() {
 		while (m_Running) {
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			m_BlueShader->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-
+			Renderer::Submit(m_SquareVA);			
 			m_Shader->Bind();
-			m_TriangleVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_TriangleVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_TriangleVA);
 			
-			for (Layer* layer : m_LayerStack) {
-				layer->OnUpdate();
-			}
+			Renderer::EndScene();
+			
+			for (Layer* layer : m_LayerStack) { layer->OnUpdate(); }
 			
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack) {
-				layer->OnImGuiRender();
-			}
+			for (Layer* layer : m_LayerStack) { layer->OnImGuiRender(); }
 			m_ImGuiLayer->End();
 			
 			m_Window->OnUpdate();
-			
 		}
 	}
 }
