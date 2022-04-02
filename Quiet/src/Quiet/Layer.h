@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Core.h"
-#include "Events/Event.h"
+#include "Quiet/Core.h"
+#include "Quiet/Events/Event.h"
+#include "Quiet/Core/Timestep.h"
 
 namespace Quiet {
 
@@ -12,7 +13,7 @@ namespace Quiet {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep timestep) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

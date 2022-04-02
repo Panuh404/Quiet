@@ -6,11 +6,14 @@
 #include "Quiet/LayerStack.h"
 #include "Quiet/Events/Event.h"
 #include "Quiet/Events/ApplicationEvent.h"
+#include "Quiet/Core/Timestep.h"
 
 #include "Quiet/ImGui/ImGuiLayer.h"
 
 #include "Quiet/Renderer/Shader.h"
 #include "Quiet/Renderer/VertexArray.h"
+#include "Quiet/Renderer/OrthographicCamera.h"
+
 
 namespace Quiet {
 	
@@ -30,18 +33,13 @@ namespace Quiet {
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
 		
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 		bool m_Running = true;
+		float m_LastFrameTime = 0.0f;
 		
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_TriangleVA;
-		
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-	private:
 		static Application* s_Instance;
 	};
 	
