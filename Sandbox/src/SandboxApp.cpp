@@ -38,17 +38,19 @@ public:
 		/////////////////////
 		m_SquareVA.reset(Quiet::VertexArray::Create());
 		float squareVertices[] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+			//Square Coord      //Tex Coord
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		};
 		Quiet::Ref<Quiet::VertexBuffer> squareVB;
 		squareVB.reset(Quiet::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		squareVB->SetLayout({
-			{ Quiet::ShaderDataType::Float3, "a_Position" }
-			});
+			{ Quiet::ShaderDataType::Float3, "a_Position" },
+			{ Quiet::ShaderDataType::Float2, "a_TexCoord" }
+		});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
@@ -64,7 +66,6 @@ public:
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
-			
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -74,7 +75,6 @@ public:
 				v_Position = a_Position;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			} )";
-
 		std::string fragmentSrc = R"(
 			#version 330 core
 
@@ -83,12 +83,12 @@ public:
 			in vec3 v_Position;		
 			in vec4 v_Color;
 
-
 			void main(){
 				color = vec4(v_Position * 0.5 + 0.5, 1.0);
 				color = v_Color;
 			} )";
-
+		
+		m_Shader.reset(Quiet::Shader::Create(vertexSrc, fragmentSrc));
 		std::string FlatColorVertexSrc = R"(
 			#version 330 core
 
@@ -96,14 +96,13 @@ public:
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
-			
+
 			out vec3 v_Position;
 
 			void main(){
 				v_Position = a_Position;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			} )";
-
 		std::string FlatColorFragmentSrc = R"(
 			#version 330 core
 
@@ -116,9 +115,42 @@ public:
 			void main(){
 				color = vec4(u_Color, 1.0);
 			} )";
-
-		m_Shader.reset(Quiet::Shader::Create(vertexSrc, fragmentSrc));
+		
 		m_FlatColorShader.reset(Quiet::Shader::Create(FlatColorVertexSrc, FlatColorFragmentSrc));
+		std::string texVertexSrc = R"(
+			#version 330 core
+
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main(){
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			} )";
+		std::string texFragmentSrc = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;	
+
+			uniform sampler2D u_Texture;
+
+			void main(){
+				color = texture(u_Texture, v_TexCoord);
+			} )";
+		
+		m_TextureShader.reset(Quiet::Shader::Create(texVertexSrc, texFragmentSrc));
+		m_TexBoard = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
+		m_TexFace = Quiet::Texture2D::Create("res/textures/awesomeface.png");
+
+		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 	
 	void OnUpdate(Quiet::Timestep deltaTime) override {
@@ -158,7 +190,11 @@ public:
 				Quiet::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
-		Quiet::Renderer::Submit(m_Shader, m_TriangleVA);
+		m_TexBoard->Bind();
+		Quiet::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_TexFace->Bind();
+		Quiet::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		
 
 		Quiet::Renderer::EndScene();
 	}
@@ -180,11 +216,9 @@ public:
 	}
 	
 private:
-	Quiet::Ref<Quiet::Shader> m_Shader;
-	Quiet::Ref<Quiet::VertexArray> m_TriangleVA;
-
-	Quiet::Ref<Quiet::Shader> m_FlatColorShader;
-	Quiet::Ref<Quiet::VertexArray> m_SquareVA;
+	Quiet::Ref<Quiet::Shader> m_Shader, m_FlatColorShader, m_TextureShader;
+	Quiet::Ref<Quiet::VertexArray> m_TriangleVA, m_SquareVA;
+	Quiet::Ref<Quiet::Texture2D> m_TexBoard, m_TexFace;
 
 	Quiet::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition = {0.0f, 0.0f, 0.0f};

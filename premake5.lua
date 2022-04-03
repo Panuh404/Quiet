@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Quiet/vendor/GLFW/include"
 IncludeDir["Glad"] = "Quiet/vendor/Glad/include"
 IncludeDir["ImGui"] = "Quiet/vendor/ImGui"
 IncludeDir["glm"] = "Quiet/vendor/glm"
+IncludeDir["stb"] = "Quiet/vendor/stb"
 
 include "Quiet/vendor/GLFW"
 include "Quiet/vendor/Glad"
@@ -37,6 +38,8 @@ project "Quiet"
 	files{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb/**h",
+		"%{prj.name}/vendor/stb/**cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -53,7 +56,8 @@ project "Quiet"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb}"
 	}
 	
 	links{

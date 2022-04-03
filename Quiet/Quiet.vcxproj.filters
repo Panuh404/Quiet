@@ -7,11 +7,17 @@
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Quiet">
       <UniqueIdentifier>{C4C3B7B3-302E-6C2A-796C-1DD0E5154A7F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Quiet\Core">
+      <UniqueIdentifier>{9CE2B548-88B0-A94E-7144-1A755DB185B3}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Quiet\Events">
       <UniqueIdentifier>{280BDB52-1404-FAA4-3D36-DF29298ED9B0}</UniqueIdentifier>
@@ -43,8 +49,29 @@
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stb">
+      <UniqueIdentifier>{8BD3C5A8-778B-07F6-E092-E051CC69A2E6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
     </ClInclude>
@@ -59,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="src\Quiet\Core.h">
       <Filter>src\Quiet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\Timestep.h">
+      <Filter>src\Quiet\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\EntryPoint.h">
       <Filter>src\Quiet</Filter>
@@ -96,10 +126,31 @@
     <ClInclude Include="src\Quiet\MouseCodes.h">
       <Filter>src\Quiet</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\Buffer.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\GraphicsContext.h">
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+    <ClInclude Include="src\Quiet\Renderer\OrthographicCamera.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\RenderCommand.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\Renderer.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\RendererAPI.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\Shader.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\Texture.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\VertexArray.h">
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Window.h">
@@ -1353,20 +1404,29 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quiet\Renderer\Shader.h" />
-    <ClInclude Include="src\Quiet\Renderer\Buffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Quiet\Renderer\Renderer.h" />
-    <ClInclude Include="src\Quiet\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Quiet\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Quiet\Renderer\RenderCommand.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\Quiet\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="src\Quiet\Core\Timestep.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="vendor\stb\stb_image.h">
+      <Filter>vendor\stb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1391,22 +1451,35 @@
     <ClCompile Include="src\Quiet\Log.cpp">
       <Filter>src\Quiet</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+    <ClCompile Include="src\Quiet\Renderer\Buffer.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\RenderCommand.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\Renderer.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\RendererAPI.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\Shader.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\Texture.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\VertexArray.cpp">
       <Filter>src\Quiet\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet_pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quiet\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="vendor\stb\stb_image.cpp">
+      <Filter>vendor\stb</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
