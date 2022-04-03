@@ -57,38 +57,7 @@ public:
 		Quiet::Ref<Quiet::IndexBuffer> squareIB;
 		squareIB.reset(Quiet::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
-
-		std::string vertexSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec3 v_Position;
-			out vec4 v_Color;
-
-			void main(){
-				v_Color = a_Color;
-				v_Position = a_Position;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-			} )";
-		std::string fragmentSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec3 v_Position;		
-			in vec4 v_Color;
-
-			void main(){
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
-			} )";
 		
-		m_Shader.reset(Quiet::Shader::Create(vertexSrc, fragmentSrc));
 		std::string FlatColorVertexSrc = R"(
 			#version 330 core
 
@@ -117,35 +86,8 @@ public:
 			} )";
 		
 		m_FlatColorShader.reset(Quiet::Shader::Create(FlatColorVertexSrc, FlatColorFragmentSrc));
-		std::string texVertexSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec2 v_TexCoord;
-
-			void main(){
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-			} )";
-		std::string texFragmentSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;	
-
-			uniform sampler2D u_Texture;
-
-			void main(){
-				color = texture(u_Texture, v_TexCoord);
-			} )";
 		
-		m_TextureShader.reset(Quiet::Shader::Create(texVertexSrc, texFragmentSrc));
+		m_TextureShader.reset(Quiet::Shader::Create("res/shaders/Texture.glsl"));
 		m_TexBoard = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
 		m_TexFace = Quiet::Texture2D::Create("res/textures/awesomeface.png");
 
@@ -216,7 +158,7 @@ public:
 	}
 	
 private:
-	Quiet::Ref<Quiet::Shader> m_Shader, m_FlatColorShader, m_TextureShader;
+	Quiet::Ref<Quiet::Shader> m_FlatColorShader, m_TextureShader;
 	Quiet::Ref<Quiet::VertexArray> m_TriangleVA, m_SquareVA;
 	Quiet::Ref<Quiet::Texture2D> m_TexBoard, m_TexFace;
 
