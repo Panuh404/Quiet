@@ -4,7 +4,5 @@
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 namespace Quiet {
-	
 	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI;
-	
 }

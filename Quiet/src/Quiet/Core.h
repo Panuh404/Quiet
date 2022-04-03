@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 #ifdef QUIET_PLATFORM_WINDOWS
 	#if QUIET_DYNAMIC_LINK
@@ -14,7 +15,6 @@
 	#error Quiet only supports Windows!
 #endif
 
-
 #ifdef QUIET_DEBUG
 	#define QUIET_ENABLE_ASSERTS
 #endif
@@ -28,8 +28,15 @@
 	#define QUIET_CORE_ASSERT(x, ...)
 #endif
 
-
 #define BIT(x) (1 << x)
 
-
 #define QUIET_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+
+namespace Quiet {
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+	
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}

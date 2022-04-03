@@ -34,7 +34,7 @@ namespace Quiet {
 		bool OnWindowClose(WindowCloseEvent& event);
 		
 	private:
-		std::unique_ptr<Window> m_Window;
+		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 		bool m_Running = true;
