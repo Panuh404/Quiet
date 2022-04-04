@@ -14,6 +14,7 @@
 #include "Quiet/Input.h"
 #include "Quiet/KeyCodes.h"
 #include "Quiet/MouseCodes.h"
+#include "Quiet/OrthographicCameraController.h"
 
 //-----------------------------------------------------------------------------
 // [SECTION] Rendererer Area

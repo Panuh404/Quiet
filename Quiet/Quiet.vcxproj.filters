@@ -126,6 +126,9 @@
     <ClInclude Include="src\Quiet\MouseCodes.h">
       <Filter>src\Quiet</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quiet\OrthographicCameraController.h">
+      <Filter>src\Quiet</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\Buffer.h">
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
@@ -1449,6 +1452,9 @@
       <Filter>src\Quiet</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Log.cpp">
+      <Filter>src\Quiet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\OrthographicCameraController.cpp">
       <Filter>src\Quiet</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\Buffer.cpp">

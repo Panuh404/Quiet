@@ -39,7 +39,8 @@ namespace Quiet {
 	
 	void Application::OnEvent(Event& event) {
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
+		dispatcher.Dispatch<WindowCloseEvent>(QUIET_BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(QUIET_BIND_EVENT_FN(Application::OnWindowResize));
 		
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
 			(*--it)->OnEvent(event);
@@ -52,6 +53,16 @@ namespace Quiet {
 		m_Running = false;
 		return true;
 	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& event) {
+		if (event.GetWidth() == 0 || event.GetHeight() == 0) {
+			m_Minimized = true;
+			return false;
+		}
+		m_Minimized = false;
+		Renderer::OnWindowResize(event.GetWidth(), event.GetHeight());
+		return false;
+	}
 	
 	void Application::Run() {
 		
@@ -60,11 +71,14 @@ namespace Quiet {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 			
-			for (Layer* layer : m_LayerStack) layer->OnUpdate(timestep); 
+			if (!m_Minimized) {
+				for (Layer* layer : m_LayerStack) 
+					layer->OnUpdate(timestep); 
+			}
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack) layer->OnImGuiRender(); 
+			for (Layer* layer : m_LayerStack) 
+				layer->OnImGuiRender(); 
 			m_ImGuiLayer->End();
-			
 			m_Window->OnUpdate();
 		}
 	}
