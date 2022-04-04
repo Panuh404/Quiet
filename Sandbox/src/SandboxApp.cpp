@@ -85,9 +85,9 @@ public:
 				color = vec4(u_Color, 1.0);
 			} )";
 		
-		m_FlatColorShader.reset(Quiet::Shader::Create(FlatColorVertexSrc, FlatColorFragmentSrc));
+		m_FlatColorShader = Quiet::Shader::Create("FlatColor", FlatColorVertexSrc, FlatColorFragmentSrc);
+		auto m_TextureShader = m_ShaderLibrary.Load("res/shaders/Texture.glsl");
 		
-		m_TextureShader.reset(Quiet::Shader::Create("res/shaders/Texture.glsl"));
 		m_TexBoard = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
 		m_TexFace = Quiet::Texture2D::Create("res/textures/awesomeface.png");
 
@@ -132,10 +132,12 @@ public:
 				Quiet::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+		
 		m_TexBoard->Bind();
-		Quiet::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Quiet::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_TexFace->Bind();
-		Quiet::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Quiet::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
 
 		Quiet::Renderer::EndScene();
@@ -158,7 +160,9 @@ public:
 	}
 	
 private:
-	Quiet::Ref<Quiet::Shader> m_FlatColorShader, m_TextureShader;
+	Quiet::ShaderLibrary m_ShaderLibrary;
+
+	Quiet::Ref<Quiet::Shader> m_FlatColorShader;
 	Quiet::Ref<Quiet::VertexArray> m_TriangleVA, m_SquareVA;
 	Quiet::Ref<Quiet::Texture2D> m_TexBoard, m_TexFace;
 

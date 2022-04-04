@@ -24,10 +24,18 @@ namespace Quiet {
 		std::string ShaderSource = ReadFile(filepath);
 		auto sources = PreProcess(ShaderSource);
 		CompileShaders(sources);
+
+		// Find Shader Name
+		auto lastSlash = filepath.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = filepath.rfind('.');
+		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+		m_Name = filepath.substr(lastSlash, count);
 	}
 	
-	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource) {
-		
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource) :
+		m_Name(name) 
+	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSource;
 		sources[GL_FRAGMENT_SHADER] = fragmentSource;
@@ -40,7 +48,7 @@ namespace Quiet {
 
 	std::string OpenGLShader::ReadFile(const std::string& filepath) {
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in) {
 			in.seekg(0, std::ios::end);
 			result.resize(in.tellg());
@@ -76,7 +84,10 @@ namespace Quiet {
 	void OpenGLShader::CompileShaders(const std::unordered_map<GLenum, std::string>& shaderSources) {
 
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs;		
+		QUIET_CORE_ASSERT(shaderSources.size() <= 4, "Too many shaders!");
+		std::array<GLenum, 4> glShaderIDs;
+		int glShaderIDindex = 0;
+		
 		for (auto& key : shaderSources) {
 			GLenum type = key.first;
 			const std::string& source = key.second;
@@ -98,11 +109,11 @@ namespace Quiet {
 				glDeleteShader(shader);
 
 				QUIET_CORE_ERROR("{0}", infoLog.data());
-				QUIET_CORE_ASSERT(false, "Vertex Shader Compilation failure!");
+				QUIET_CORE_ASSERT(false, "Shader Compilation failure!");
 				return;
 			}
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDindex++] = (shader);
 		}
 		
 		glLinkProgram(program);
