@@ -86,8 +86,8 @@ namespace Quiet {
 	void OpenGLShader::CompileShaders(const std::unordered_map<GLenum, std::string>& shaderSources) {
 
 		GLuint program = glCreateProgram();
-		QUIET_CORE_ASSERT(shaderSources.size() <= 2, "Too many shaders!");
-		std::array<GLenum, 2> glShaderIDs;
+		QUIET_CORE_ASSERT(shaderSources.size() <= 4, "Too many shaders!");
+		std::array<GLenum, 4> glShaderIDs;
 		int glShaderIDindex = 0;
 		
 		for (auto& key : shaderSources) {

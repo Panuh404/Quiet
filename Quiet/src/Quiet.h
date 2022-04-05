@@ -20,6 +20,7 @@
 // [SECTION] Rendererer Area
 //-----------------------------------------------------------------------------
 #include "Quiet/Renderer/Renderer.h"
+#include "Quiet/Renderer/Renderer2D.h"
 #include "Quiet/Renderer/RenderCommand.h"
 
 #include "Quiet/Renderer/Buffer.h"

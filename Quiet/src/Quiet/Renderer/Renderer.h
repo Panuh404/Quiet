@@ -24,8 +24,7 @@ namespace Quiet {
 	private:
 		struct SceneData {
 			glm::mat4 ViewProjectionMatrix;
-		
-		};
+ 		};
 
 		static Scope<SceneData> s_SceneData;
 	};

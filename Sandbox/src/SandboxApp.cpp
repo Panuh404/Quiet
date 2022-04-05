@@ -11,64 +11,64 @@
 
 class ExampleLayer : public Quiet::Layer {
 public:
-	//ExampleLayer() : Layer("Example"), 
-	//	m_CameraController(1280.0f / 720.0f) 
-	//{
-	//	////// Triangle /////
-	//	m_TriangleVA = Quiet::VertexArray::Create();
-	//	float triangleVertices[] = {
-	//
-	//		-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-	//		 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-	//		 0.0f,  0.5f, 0.0f, 0.8f, 0.7f, 0.2f, 1.0f
-	//	};
-	//	Quiet::Ref<Quiet::VertexBuffer> triangleVB;
-	//	triangleVB = Quiet::VertexBuffer::Create(triangleVertices, sizeof(triangleVertices));
-	//
-	//	triangleVB->SetLayout({
-	//		{ Quiet::ShaderDataType::Float3, "a_Position" },
-	//		{ Quiet::ShaderDataType::Float4, "a_Color"}
-	//		});
-	//	m_TriangleVA->AddVertexBuffer(triangleVB);
-	//
-	//	uint32_t triangleIndices[3] = { 0, 1, 2 };
-	//	Quiet::Ref<Quiet::IndexBuffer> triangleIB;
-	//	triangleIB = Quiet::IndexBuffer::Create(triangleIndices, sizeof(triangleIndices) / sizeof(uint32_t));
-	//	m_TriangleVA->SetIndexBuffer(triangleIB);
-	//	
-	//	///// Square /////
-	//	m_SquareVA = Quiet::VertexArray::Create();
-	//	float squareVertices[] = {
-	//		//Square Coord      //Tex Coord
-	//		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-	//		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-	//		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-	//		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-	//	};
-	//	Quiet::Ref<Quiet::VertexBuffer> squareVB;
-	//	squareVB = Quiet::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
-	//
-	//	squareVB->SetLayout({
-	//		{ Quiet::ShaderDataType::Float3, "a_Position" },
-	//		{ Quiet::ShaderDataType::Float2, "a_TexCoord" }
-	//	});
-	//	m_SquareVA->AddVertexBuffer(squareVB);
-	//
-	//	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-	//	Quiet::Ref<Quiet::IndexBuffer> squareIB;
-	//	squareIB = Quiet::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
-	//	m_SquareVA->SetIndexBuffer(squareIB);
-	//	
-	//	// Shader Handling
-	//	m_FlatColorShader = Quiet::Shader::Create("res/shaders/FlatColor.glsl");
-	//	auto m_TextureShader = m_ShaderLibrary.Load("res/shaders/Texture.glsl");
-	//	
-	//	m_TexBoard = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
-	//	m_TexFace = Quiet::Texture2D::Create("res/textures/awesomeface.png");
-	//
-	//	std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->Bind();
-	//	std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
-	//}
+	ExampleLayer() : Layer("Example"), 
+		m_CameraController(1280.0f / 720.0f) 
+	{
+		////// Triangle /////
+		m_TriangleVA = Quiet::VertexArray::Create();
+		float triangleVertices[] = {
+	
+			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 0.8f, 0.7f, 0.2f, 1.0f
+		};
+		Quiet::Ref<Quiet::VertexBuffer> triangleVB;
+		triangleVB = Quiet::VertexBuffer::Create(triangleVertices, sizeof(triangleVertices));
+	
+		triangleVB->SetLayout({
+			{ Quiet::ShaderDataType::Float3, "a_Position" },
+			{ Quiet::ShaderDataType::Float4, "a_Color"}
+			});
+		m_TriangleVA->AddVertexBuffer(triangleVB);
+	
+		uint32_t triangleIndices[3] = { 0, 1, 2 };
+		Quiet::Ref<Quiet::IndexBuffer> triangleIB;
+		triangleIB = Quiet::IndexBuffer::Create(triangleIndices, sizeof(triangleIndices) / sizeof(uint32_t));
+		m_TriangleVA->SetIndexBuffer(triangleIB);
+		
+		///// Square /////
+		m_SquareVA = Quiet::VertexArray::Create();
+		float squareVertices[] = {
+			//Square Coord      //Tex Coord
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+		};
+		Quiet::Ref<Quiet::VertexBuffer> squareVB;
+		squareVB = Quiet::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
+	
+		squareVB->SetLayout({
+			{ Quiet::ShaderDataType::Float3, "a_Position" },
+			{ Quiet::ShaderDataType::Float2, "a_TexCoord" }
+		});
+		m_SquareVA->AddVertexBuffer(squareVB);
+	
+		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+		Quiet::Ref<Quiet::IndexBuffer> squareIB;
+		squareIB = Quiet::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
+		m_SquareVA->SetIndexBuffer(squareIB);
+		
+		// Shader Handling
+		m_FlatColorShader = Quiet::Shader::Create("res/shaders/FlatColor.glsl");
+		auto m_TextureShader = m_ShaderLibrary.Load("res/shaders/Texture.glsl");
+		
+		m_TexBoard = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
+		m_TexFace = Quiet::Texture2D::Create("res/textures/awesomeface.png");
+	
+		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+	}
 	
 	void OnUpdate(Quiet::Timestep deltaTime) override {
 		// Update
