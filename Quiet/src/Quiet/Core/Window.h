@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Quiet_pch.h"
-
-#include "Quiet/Core.h"
+#include "Quiet/Core/Core.h"
 #include "Quiet/Events/Event.h"
 
 namespace Quiet {

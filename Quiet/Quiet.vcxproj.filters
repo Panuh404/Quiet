@@ -81,17 +81,38 @@
     <ClInclude Include="src\Quiet.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quiet\Application.h">
-      <Filter>src\Quiet</Filter>
+    <ClInclude Include="src\Quiet\Core\Application.h">
+      <Filter>src\Quiet\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quiet\Core.h">
-      <Filter>src\Quiet</Filter>
+    <ClInclude Include="src\Quiet\Core\Core.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\EntryPoint.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\Input.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\KeyCodes.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\Layer.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\LayerStack.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\Log.h">
+      <Filter>src\Quiet\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Core\MouseCodes.h">
+      <Filter>src\Quiet\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Core\Timestep.h">
       <Filter>src\Quiet\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quiet\EntryPoint.h">
-      <Filter>src\Quiet</Filter>
+    <ClInclude Include="src\Quiet\Core\Window.h">
+      <Filter>src\Quiet\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Events\ApplicationEvent.h">
       <Filter>src\Quiet\Events</Filter>
@@ -108,27 +129,6 @@
     <ClInclude Include="src\Quiet\ImGui\ImGuiLayer.h">
       <Filter>src\Quiet\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quiet\Input.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\KeyCodes.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\Layer.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\LayerStack.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\Log.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\MouseCodes.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\OrthographicCameraController.h">
-      <Filter>src\Quiet</Filter>
-    </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\Buffer.h">
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
@@ -136,6 +136,9 @@
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\OrthographicCamera.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\OrthographicCameraController.h">
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\RenderCommand.h">
@@ -155,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\VertexArray.h">
       <Filter>src\Quiet\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quiet\Window.h">
-      <Filter>src\Quiet</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet_pch.h">
       <Filter>src</Filter>
@@ -1436,8 +1436,17 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quiet\Application.cpp">
-      <Filter>src\Quiet</Filter>
+    <ClCompile Include="src\Quiet\Core\Application.cpp">
+      <Filter>src\Quiet\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Core\Layer.cpp">
+      <Filter>src\Quiet\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Core\LayerStack.cpp">
+      <Filter>src\Quiet\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Core\Log.cpp">
+      <Filter>src\Quiet\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\ImGui\ImGuiBuild.cpp">
       <Filter>src\Quiet\ImGui</Filter>
@@ -1445,22 +1454,13 @@
     <ClCompile Include="src\Quiet\ImGui\ImGuiLayer.cpp">
       <Filter>src\Quiet\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quiet\Layer.cpp">
-      <Filter>src\Quiet</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quiet\LayerStack.cpp">
-      <Filter>src\Quiet</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quiet\Log.cpp">
-      <Filter>src\Quiet</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quiet\OrthographicCameraController.cpp">
-      <Filter>src\Quiet</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\Buffer.cpp">
       <Filter>src\Quiet\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\OrthographicCameraController.cpp">
       <Filter>src\Quiet\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\RenderCommand.cpp">

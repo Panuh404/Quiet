@@ -1,8 +1,8 @@
 #include "Quiet_pch.h"
 #include "OrthographicCameraController.h"
 
-#include "Quiet/Input.h"
-#include "Quiet/KeyCodes.h"
+#include "Quiet/Core/Input.h"
+#include "Quiet/Core/KeyCodes.h"
 
 namespace Quiet {
 	

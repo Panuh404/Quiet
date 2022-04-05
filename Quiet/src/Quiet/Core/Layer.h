@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Quiet/Core.h"
+#include "Quiet/Core/Core.h"
 #include "Quiet/Events/Event.h"
 #include "Quiet/Core/Timestep.h"
 

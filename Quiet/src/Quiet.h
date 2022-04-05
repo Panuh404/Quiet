@@ -3,18 +3,18 @@
 //-----------------------------------------------------------------------------
 // FOR USE BY QUIET APPLICATIONS
 //-----------------------------------------------------------------------------
-#include "Quiet/Application.h"
-#include "Quiet/Layer.h"
-#include "Quiet/Log.h"
+#include "Quiet/Core/Application.h"
+#include "Quiet/Core/Layer.h"
+#include "Quiet/Core/Log.h"
 #include "Quiet/Core/Timestep.h"
 
 //-----------------------------------------------------------------------------
 // [SECTION] Input Area
 //-----------------------------------------------------------------------------
-#include "Quiet/Input.h"
-#include "Quiet/KeyCodes.h"
-#include "Quiet/MouseCodes.h"
-#include "Quiet/OrthographicCameraController.h"
+#include "Quiet/Core/Input.h"
+#include "Quiet/Core/KeyCodes.h"
+#include "Quiet/Core/MouseCodes.h"
+#include "Quiet/Renderer/OrthographicCameraController.h"
 
 //-----------------------------------------------------------------------------
 // [SECTION] Rendererer Area
@@ -32,4 +32,4 @@
 //-----------------------------------------------------------------------------
 // [SECTION] Entry Point
 //-----------------------------------------------------------------------------
-#include "Quiet/EntryPoint.h"
+#include "Quiet/Core/EntryPoint.h"

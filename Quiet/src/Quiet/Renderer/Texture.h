@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Quiet/Core.h"
+#include "Quiet/Core/Core.h"
 
 namespace Quiet {
 

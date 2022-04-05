@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Quiet/Window.h"
+#include "Quiet/Core/Window.h"
 #include "Quiet/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

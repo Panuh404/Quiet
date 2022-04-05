@@ -1,6 +1,6 @@
 #include "Quiet_pch.h"
 #include "WindowsInput.h"
-#include "Quiet/Application.h"
+#include "Quiet/Core/Application.h"
 
 #include "GLFW/glfw3.h"
 

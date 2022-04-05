@@ -5,7 +5,7 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
-#include "Quiet/Application.h"
+#include "Quiet/Core/Application.h"
 
 // TEMP
 #include "glad/glad.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Quiet/Input.h"
+#include "Quiet/Core/Input.h"
 
 namespace Quiet {
 	

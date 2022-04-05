@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Quiet/Log.h"
+#include "Quiet/Core/Log.h"
 
 #ifdef QUIET_PLATFORM_WINDOWS
 	#include <Windows.h>
