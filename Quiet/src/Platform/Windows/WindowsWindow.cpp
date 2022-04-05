@@ -9,7 +9,8 @@
 
 namespace Quiet {
 
-	static bool s_GLFWInitialized = false;
+	static uint32_t s_GLFWWindowCount = 0;
+	
 	static void GLFWErrorCallback(int error, const char* description) {
 		QUIET_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
@@ -31,13 +32,15 @@ namespace Quiet {
 
 		QUIET_CORE_INFO("Creating window {0} ({1}:{2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized) {
+		if (s_GLFWWindowCount == 0) {
+			QUIET_CORE_INFO("Initializing GLFW");
 			int success = glfwInit();
 			QUIET_CORE_ASSERT(success, "Could not initialize GLFW!");
-			s_GLFWInitialized = true;
+			glfwSetErrorCallback(GLFWErrorCallback);
 		}
 		
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		++s_GLFWWindowCount;
 		m_Context = CreateScope<OpenGLContext>(m_Window);
 		m_Context->Init();
 
@@ -116,6 +119,10 @@ namespace Quiet {
 
 	void WindowsWindow::Shutdown() {
 		glfwDestroyWindow(m_Window);
+		if (--s_GLFWWindowCount == 0) {
+			QUIET_CORE_INFO("Terminating GLFW");
+			glfwTerminate();
+		}
 	}
 
 	void WindowsWindow::OnUpdate() {

@@ -19,6 +19,7 @@ private:
 	// Temp
 	Quiet::Ref<Quiet::VertexArray> m_VertexArray;
 	Quiet::Ref<Quiet::Shader> m_FlatColorShader;
+	Quiet::Ref<Quiet::Texture2D> m_Texture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f};
 };
