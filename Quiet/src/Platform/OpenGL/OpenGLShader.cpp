@@ -64,18 +64,20 @@ namespace Quiet {
 	
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string source) {
 		std::unordered_map<GLenum, std::string> shaderSources;
-		
 		const char* typeToken = "#TYPE:";
 		size_t typeTokenLength = strlen(typeToken);
-		size_t pos = source.find(typeToken, 0);
+		
+		//  Start of the shader type declaration line
+		size_t pos = source.find(typeToken, 0); 
+		
 		while (pos != std::string::npos) {
-			size_t eol = source.find_first_of("\r\n", pos);
+			size_t eol = source.find_first_of("\r\n", pos); // End of shader type declaration line
 			QUIET_CORE_ASSERT(eol != std::string::npos, "Syntax error");
-			size_t begin = pos + typeTokenLength + 1;
+			size_t begin = pos + typeTokenLength + 1; // Start shader type name (after #TYPE: keyword)
 			std::string type = source.substr(begin, eol - begin);
 
-			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
-			pos = source.find(typeToken, nextLinePos);
+			size_t nextLinePos = source.find_first_not_of("\r\n", eol); //Start of shader code after shader type declaration line
+			pos = source.find(typeToken, nextLinePos); //Start of next shader type declaration line
 			shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
 		}
 		return shaderSources;
@@ -84,8 +86,8 @@ namespace Quiet {
 	void OpenGLShader::CompileShaders(const std::unordered_map<GLenum, std::string>& shaderSources) {
 
 		GLuint program = glCreateProgram();
-		QUIET_CORE_ASSERT(shaderSources.size() <= 4, "Too many shaders!");
-		std::array<GLenum, 4> glShaderIDs;
+		QUIET_CORE_ASSERT(shaderSources.size() <= 2, "Too many shaders!");
+		std::array<GLenum, 2> glShaderIDs;
 		int glShaderIDindex = 0;
 		
 		for (auto& key : shaderSources) {
@@ -126,9 +128,7 @@ namespace Quiet {
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 			
 			std::vector<GLchar> infoLog(maxLength);			
-			QUIET_CORE_INFO("1PROBLEM");
 			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
-			QUIET_CORE_INFO("2PROBLEM");
 			glDeleteProgram(program);
 			
 			for (auto& id : glShaderIDs) {

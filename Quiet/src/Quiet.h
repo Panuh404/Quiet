@@ -28,8 +28,4 @@
 #include "Quiet/Renderer/VertexArray.h"
 
 #include "Quiet/Renderer/OrthographicCamera.h"
-
 //-----------------------------------------------------------------------------
-// [SECTION] Entry Point
-//-----------------------------------------------------------------------------
-#include "Quiet/Core/EntryPoint.h"

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Quiet/Core/Core.h"
-#include "Quiet/Events/Event.h"
 #include "Quiet/Core/Timestep.h"
+#include "Quiet/Events/Event.h"
 
 namespace Quiet {
 

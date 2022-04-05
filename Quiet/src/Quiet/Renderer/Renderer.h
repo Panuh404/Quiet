@@ -27,7 +27,7 @@ namespace Quiet {
 		
 		};
 
-		static SceneData* m_SceneData;
+		static Scope<SceneData> s_SceneData;
 	};
 }
 
