@@ -1,10 +1,8 @@
 #include "Quiet_pch.h"
-#include "LayerStack.h"
+#include "Quiet/Core/LayerStack.h"
 
 namespace Quiet {
 	
-	LayerStack::LayerStack() {}
-
 	LayerStack::~LayerStack() {
 		for (Layer* layer : m_Layers) {
 			layer->OnDetach();

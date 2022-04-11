@@ -1,7 +1,7 @@
 #pragma once
 
-#include "OrthographicCamera.h"
-#include "Texture.h"
+#include "Quiet/Renderer/OrthographicCamera.h"
+#include "Quiet/Renderer/Texture.h"
 
 #include <glm/glm.hpp>
 

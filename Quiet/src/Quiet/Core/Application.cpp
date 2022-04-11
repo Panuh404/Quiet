@@ -1,8 +1,9 @@
 #include "Quiet_pch.h"
-#include "Application.h"
-#include "Input.h"
 
+#include "Quiet/Core/Application.h"
+#include "Quiet/Core/Input.h"
 #include "Quiet/Renderer/Renderer.h"
+
 #include "GLFW/glfw3.h"
 
 namespace Quiet {
@@ -19,12 +20,12 @@ namespace Quiet {
 		m_Window->SetVSync(true);
 
 		Renderer::Init();
-
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
 	
-	Application::~Application() {
+	Application::~Application()	{
+		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer) {

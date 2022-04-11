@@ -1,8 +1,8 @@
 #include "Quiet_pch.h"
-#include "OpenGLBuffer.h"
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include "Platform/OpenGL/OpenGLBuffer.h"
+
+#include <glad/glad.h>
 
 namespace Quiet {
 	///////////////////

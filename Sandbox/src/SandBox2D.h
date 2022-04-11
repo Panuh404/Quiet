@@ -21,5 +21,12 @@ private:
 	Quiet::Ref<Quiet::Shader> m_FlatColorShader;
 	Quiet::Ref<Quiet::Texture2D> m_Texture;
 
-	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f};
+	struct ProfileResult {
+		const char* Name;
+		float Time;
+	};
+	std::vector<ProfileResult> m_ProfileResults;
+	
+	glm::vec4 m_SquareColor1 = { 0.2f, 0.3f, 0.8f, 1.0f};
+	glm::vec4 m_SquareColor2 = { 0.8f, 0.2f, 0.3f, 1.0f };
 };

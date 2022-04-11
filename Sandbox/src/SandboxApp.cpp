@@ -1,11 +1,9 @@
 #include "Quiet.h"
 #include "Quiet/Core/EntryPoint.h"
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
-#include "ImGui/imgui.h"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
+#include <ImGui/imgui.h>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "SandBox2D.h"
 
@@ -66,8 +64,8 @@ public:
 		m_TexBoard = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
 		m_TexFace = Quiet::Texture2D::Create("res/textures/awesomeface.png");
 	
-		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		m_TextureShader->Bind();
+		m_TextureShader->SetInt("u_Texture", 0);
 	}
 	
 	void OnUpdate(Quiet::Timestep deltaTime) override {
@@ -82,8 +80,8 @@ public:
 		
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<Quiet::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+		m_FlatColorShader->Bind();
+		m_FlatColorShader->SetFloat3("u_Color", m_SquareColor);
 		
 		for (int y = 0; y < 20; y++) {
 			for (int x = 0; x < 20; x++) {

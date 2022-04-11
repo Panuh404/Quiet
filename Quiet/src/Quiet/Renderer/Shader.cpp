@@ -1,7 +1,8 @@
 #include "Quiet_pch.h"
-#include "Shader.h"
 
-#include "Renderer.h"
+#include "Quiet/Renderer/Shader.h"
+#include "Quiet/Renderer/Renderer.h"
+
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Quiet {
@@ -12,7 +13,7 @@ namespace Quiet {
 	{
 		switch (Renderer::GetAPI()) {
 		case RendererAPI::API::None:		QUIET_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(filepath);
+		case RendererAPI::API::OpenGL:		return CreateRef<OpenGLShader>(filepath);
 		case RendererAPI::API::Vulkan:		QUIET_CORE_ASSERT(false, "RendererAPI::Vulkan is currently not supported!"); return nullptr;
 		case RendererAPI::API::Direct3D:	QUIET_CORE_ASSERT(false, "RendererAPI::Direct3D is currently not supported!"); return nullptr;
 		}
@@ -22,7 +23,7 @@ namespace Quiet {
 	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource) {
 		switch (Renderer::GetAPI()) {
 		case RendererAPI::API::None:		QUIET_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(name, vertexSource, fragmentSource);
+		case RendererAPI::API::OpenGL:		return CreateRef<OpenGLShader>(name, vertexSource, fragmentSource);
 		case RendererAPI::API::Vulkan:		QUIET_CORE_ASSERT(false, "RendererAPI::Vulkan is currently not supported!"); return nullptr;
 		case RendererAPI::API::Direct3D:	QUIET_CORE_ASSERT(false, "RendererAPI::Direct3D is currently not supported!"); return nullptr;
 		}

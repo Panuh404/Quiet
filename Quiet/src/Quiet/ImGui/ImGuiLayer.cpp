@@ -1,15 +1,15 @@
 #include "Quiet_pch.h"
-#include "ImGuiLayer.h"
 
-#include "imgui.h"
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
 
+#include "Quiet/ImGui/ImGuiLayer.h"
 #include "Quiet/Core/Application.h"
 
 // TEMP
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Quiet {
 	
@@ -50,11 +50,6 @@ namespace Quiet {
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
-	}
-
-	void ImGuiLayer::OnImGuiRender() {
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
 	}
 	
 	void ImGuiLayer::Begin() {

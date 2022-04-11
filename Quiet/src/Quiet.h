@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 // FOR USE BY QUIET APPLICATIONS
 //-----------------------------------------------------------------------------
+#include "Quiet/Core/Core.h"
+
 #include "Quiet/Core/Application.h"
 #include "Quiet/Core/Layer.h"
 #include "Quiet/Core/Log.h"

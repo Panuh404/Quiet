@@ -1,8 +1,9 @@
 #include "Quiet_pch.h"
-#include "WindowsInput.h"
+
+#include "Platform/Windows/WindowsInput.h"
 #include "Quiet/Core/Application.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 namespace Quiet {
 	

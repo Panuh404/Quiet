@@ -1,5 +1,6 @@
 #include "Quiet_pch.h"
-#include "OrthographicCameraController.h"
+
+#include "Quiet/Renderer/OrthographicCameraController.h"
 
 #include "Quiet/Core/Input.h"
 #include "Quiet/Core/KeyCodes.h"

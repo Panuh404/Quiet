@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core.h"
+#include "Quiet/Core/Core.h"
 
-#include "Window.h"
+#include "Quiet/Core/Window.h"
 #include "Quiet/Core/LayerStack.h"
 #include "Quiet/Events/Event.h"
 #include "Quiet/Events/ApplicationEvent.h"

@@ -1,4 +1,5 @@
 #pragma once
+#include "Quiet/Core/Core.h"
 
 #ifdef QUIET_PLATFORM_WINDOWS
 

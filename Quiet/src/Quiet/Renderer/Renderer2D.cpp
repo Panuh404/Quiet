@@ -1,9 +1,9 @@
 #include "Quiet_pch.h"
-#include "Renderer2D.h"
 
-#include "RenderCommand.h"
-#include "VertexArray.h"
-#include "Shader.h"
+#include "Quiet/Renderer/Renderer2D.h"
+#include "Quiet/Renderer/RenderCommand.h"
+#include "Quiet/Renderer/VertexArray.h"
+#include "Quiet/Renderer/Shader.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

@@ -1,4 +1,4 @@
-// FLAT COLOR SHADER
+// FLAT COLOR SHADER //
 
 #TYPE: VERTEX
 #version 330 core

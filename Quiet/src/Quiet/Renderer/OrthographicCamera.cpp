@@ -1,7 +1,8 @@
 #include "Quiet_pch.h"
-#include "OrthographicCamera.h"
 
-#include "glm/gtc/matrix_transform.hpp"
+#include "Quiet/Renderer/OrthographicCamera.h"
+
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Quiet {
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top) :

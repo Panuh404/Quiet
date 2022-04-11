@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+
 #include "Quiet/Renderer/Buffer.h"
 
 namespace Quiet {
