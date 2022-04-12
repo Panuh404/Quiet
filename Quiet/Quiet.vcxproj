@@ -605,9 +605,11 @@
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Quiet\Core\Application.cpp" />
+    <ClCompile Include="src\Quiet\Core\Input.cpp" />
     <ClCompile Include="src\Quiet\Core\Layer.cpp" />
     <ClCompile Include="src\Quiet\Core\LayerStack.cpp" />
     <ClCompile Include="src\Quiet\Core\Log.cpp" />
+    <ClCompile Include="src\Quiet\Core\Window.cpp" />
     <ClCompile Include="src\Quiet\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Quiet\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Quiet\Renderer\Buffer.cpp" />
