@@ -3,5 +3,8 @@
 bin/
 bin-int/
 
+# Quiet Files
+*.log
+
 # Files
 *.user

@@ -14,6 +14,8 @@
 #include "Quiet/Renderer/VertexArray.h"
 #include "Quiet/Renderer/OrthographicCamera.h"
 
+int main(int argc, char** argv);
+
 namespace Quiet
 {
 	class Application
@@ -22,7 +24,6 @@ namespace Quiet
 		Application();
 		virtual ~Application();
 		
-		void Run();
 		void OnEvent(Event& event);
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
@@ -39,8 +40,10 @@ namespace Quiet
 		float m_LastFrameTime = 0.0f;
 		
 		static Application* s_Instance;
+		friend int ::main(int argc, char** argv);
 
 	private:
+		void Run();
 		bool OnWindowClose(WindowCloseEvent& event);
 		bool OnWindowResize(WindowResizeEvent& event);
 	};
