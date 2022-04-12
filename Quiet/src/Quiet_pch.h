@@ -1,7 +1,7 @@
 #pragma once
 
 //-----------------------------------------------------------------------------
-// [SECTION] QUIET PRECOMPILED HEADERS
+// QUIET PRECOMPILED HEADERS
 //-----------------------------------------------------------------------------
 #include <iostream>
 #include <memory>
@@ -16,8 +16,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-// Logger
 #include "Quiet/Core/Log.h"
+#include "Quiet/Debug/Instrumentor.h"
 
 #ifdef QUIET_PLATFORM_WINDOWS
 	#include <Windows.h>

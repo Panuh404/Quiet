@@ -12,35 +12,49 @@ namespace Quiet {
 
 	static uint32_t s_GLFWWindowCount = 0;
 	
-	static void GLFWErrorCallback(int error, const char* description) {
+	static void GLFWErrorCallback(int error, const char* description)
+	{
 		QUIET_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
-
-	Scope<Window> Window::Create(const WindowProps& props) {
+	
+	Scope<Window> Window::Create(const WindowProps& props)
+	{
 		return CreateScope<WindowsWindow>(props);
 	}
-	WindowsWindow::WindowsWindow(const WindowProps& props) {
+	WindowsWindow::WindowsWindow(const WindowProps& props)
+	{
+		QUIET_PROFILE_FUNCTION();
 		Init(props);
 	}
-	WindowsWindow::~WindowsWindow() {
+	WindowsWindow::~WindowsWindow()
+	{
+		QUIET_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowProps& props) {
+	void WindowsWindow::Init(const WindowProps& props)
+	{
+		QUIET_PROFILE_FUNCTION();
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
 		QUIET_CORE_INFO("Creating window {0} ({1}:{2})", props.Title, props.Width, props.Height);
 
-		if (s_GLFWWindowCount == 0) {
+		if (s_GLFWWindowCount == 0) 
+		{
+			QUIET_PROFILE_SCOPE("glfwInit");
 			int success = glfwInit();
 			QUIET_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
 		
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		++s_GLFWWindowCount;
+		{
+			QUIET_PROFILE_SCOPE("glfwCreateWindow");
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			++s_GLFWWindowCount;
+		}
+		
 		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 
@@ -48,7 +62,8 @@ namespace Quiet {
 		SetVSync(true);
 
 		//Set GLFW Callbacks
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
@@ -63,7 +78,8 @@ namespace Quiet {
 			data.EventCallback(event);
 		});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			switch (action) {
 				case GLFW_PRESS: {
@@ -84,13 +100,15 @@ namespace Quiet {
 			}
 		});
 		
-		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			KeyTypedEvent event(keycode);
 			data.EventCallback(event);
 		});
 		
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			switch (action) {
 			case GLFW_PRESS: {
@@ -118,6 +136,7 @@ namespace Quiet {
 	}
 
 	void WindowsWindow::Shutdown() {
+		QUIET_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_Window);
 		--s_GLFWWindowCount;
 		if (s_GLFWWindowCount == 0) 
@@ -125,11 +144,13 @@ namespace Quiet {
 	}
 
 	void WindowsWindow::OnUpdate() {
+		QUIET_PROFILE_FUNCTION();		
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {
+		QUIET_PROFILE_FUNCTION();
 		if (enabled) glfwSwapInterval(1);
 		else glfwSwapInterval(0);
 		m_Data.VSync = enabled;

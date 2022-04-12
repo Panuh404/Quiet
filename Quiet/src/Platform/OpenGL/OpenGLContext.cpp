@@ -14,6 +14,7 @@ namespace Quiet {
 	}
 	
 	void OpenGLContext::Init() {
+		QUIET_PROFILE_FUNCTION();
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		QUIET_CORE_ASSERT(status, "Failed to initialize Glad");
@@ -35,6 +36,7 @@ namespace Quiet {
 	}
 
 	void OpenGLContext::SwapBuffers() {
+		QUIET_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

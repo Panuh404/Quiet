@@ -12,6 +12,7 @@ namespace Quiet {
 
 
 	Application::Application() {
+		QUIET_PROFILE_FUNCTION();
 		QUIET_ASSERT(!s_Instance, "Application already exist!");
 		s_Instance = this;
 		
@@ -25,20 +26,24 @@ namespace Quiet {
 	}
 	
 	Application::~Application()	{
+		QUIET_PROFILE_FUNCTION();
 		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer) {
+		QUIET_PROFILE_FUNCTION();
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 	
 	void Application::PushOverlay(Layer* overlay) {
+		QUIET_PROFILE_FUNCTION();
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 	
 	void Application::OnEvent(Event& event) {
+		QUIET_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(QUIET_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(QUIET_BIND_EVENT_FN(Application::OnWindowResize));
@@ -56,6 +61,7 @@ namespace Quiet {
 	}
 
 	bool Application::OnWindowResize(WindowResizeEvent& event) {
+		QUIET_PROFILE_FUNCTION();
 		if (event.GetWidth() == 0 || event.GetHeight() == 0) {
 			m_Minimized = true;
 			return false;
@@ -66,19 +72,25 @@ namespace Quiet {
 	}
 	
 	void Application::Run() {
-		
+		QUIET_PROFILE_FUNCTION();
 		while (m_Running) {
+			QUIET_PROFILE_SCOPE("RunLoop");
 			float time = glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 			
 			if (!m_Minimized) {
+				QUIET_PROFILE_SCOPE("LayerStack::OnUpdate");
 				for (Layer* layer : m_LayerStack) 
 					layer->OnUpdate(timestep); 
 			}
+			
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack) 
-				layer->OnImGuiRender(); 
+			{
+				QUIET_PROFILE_SCOPE("LayerStack::OnImGuiRender");
+				for (Layer* layer : m_LayerStack) 
+					layer->OnImGuiRender(); 
+			}
 			m_ImGuiLayer->End();
 			m_Window->OnUpdate();
 		}

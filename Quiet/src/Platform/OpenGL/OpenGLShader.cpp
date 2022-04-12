@@ -22,6 +22,7 @@ namespace Quiet {
 	}
 	
 	OpenGLShader::OpenGLShader(const std::string& filepath)	{
+		QUIET_PROFILE_FUNCTION();
 		std::string ShaderSource = ReadFile(filepath);
 		auto sources = PreProcess(ShaderSource);
 		CompileShaders(sources);
@@ -37,6 +38,7 @@ namespace Quiet {
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource) :
 		m_Name(name) 
 	{
+		QUIET_PROFILE_FUNCTION();
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSource;
 		sources[GL_FRAGMENT_SHADER] = fragmentSource;
@@ -44,10 +46,12 @@ namespace Quiet {
 	}
 
 	OpenGLShader::~OpenGLShader() {
+		QUIET_PROFILE_FUNCTION();
 		glDeleteProgram(m_RendererID);
 	}
 
 	std::string OpenGLShader::ReadFile(const std::string& filepath) {
+		QUIET_PROFILE_FUNCTION();		
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in) {
@@ -70,6 +74,7 @@ namespace Quiet {
 	}
 	
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string source) {
+		QUIET_PROFILE_FUNCTION();
 		std::unordered_map<GLenum, std::string> shaderSources;
 		const char* typeToken = "#TYPE:";
 		size_t typeTokenLength = strlen(typeToken);
@@ -91,7 +96,7 @@ namespace Quiet {
 	}
 
 	void OpenGLShader::CompileShaders(const std::unordered_map<GLenum, std::string>& shaderSources) {
-
+		QUIET_PROFILE_FUNCTION();
 		GLuint program = glCreateProgram();
 		QUIET_CORE_ASSERT(shaderSources.size() <= 4, "Too many shaders!");
 		std::array<GLenum, 4> glShaderIDs;
@@ -153,24 +158,22 @@ namespace Quiet {
 	}
 
 	void OpenGLShader::Bind() const {
+		QUIET_PROFILE_FUNCTION();
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const {
+		QUIET_PROFILE_FUNCTION();
 		glUseProgram(0);
 	}
 
-
-
-
-
-	void OpenGLShader::SetInt(const std::string& name, const int& value)			{ UploadUniformInt(name, value);	 }
-	void OpenGLShader::SetFloat(const std::string& name, const float& values)		{ UploadUniformFloat(name, values);  }
-	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& values)	{ UploadUniformFloat2(name, values); }
-	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& values)	{ UploadUniformFloat3(name, values); }
-	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& values)	{ UploadUniformFloat4(name, values); }
-	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)	{ UploadUniformMat3(name, matrix);   }
-	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)	{ UploadUniformMat4(name, matrix);   }
+	void OpenGLShader::SetInt(const std::string& name, const int& value)			{ QUIET_PROFILE_FUNCTION(); UploadUniformInt(name, value);	 }
+	void OpenGLShader::SetFloat(const std::string& name, const float& values)		{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat(name, values);  }
+	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& values)	{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat2(name, values); }
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& values)	{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat3(name, values); }
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& values)	{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat4(name, values); }
+	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)	{ QUIET_PROFILE_FUNCTION(); UploadUniformMat3(name, matrix);   }
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)	{ QUIET_PROFILE_FUNCTION(); UploadUniformMat4(name, matrix);   }
 
 	
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value)	{
