@@ -1,13 +1,16 @@
 #pragma once
 
-namespace Quiet {
-
-	enum class ShaderDataType {
+namespace Quiet
+{
+	enum class ShaderDataType
+	{
 		None = 0, Bool, Int, Int2, Int3, Int4, Float, Float2, Float3, Float4, Mat3, Mat4
 	};
 
-	static uint32_t ShaderDataTypeSize(ShaderDataType type) {
-		switch (type) {
+	static uint32_t ShaderDataTypeSize(ShaderDataType type)
+	{
+		switch (type)
+		{
 			case ShaderDataType::Bool:		return 1;
 			case ShaderDataType::Int:		return 4;
 			case ShaderDataType::Int2:		return 4 * 2;
@@ -22,7 +25,8 @@ namespace Quiet {
 		}
 	}
 
-	struct BufferElement {
+	struct BufferElement
+	{
 		std::string Name;
 		ShaderDataType Type;
 		uint32_t Offset;
@@ -34,8 +38,10 @@ namespace Quiet {
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false) :
 			Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized) {}
 
-		uint32_t GetComponentCount() const {
-			switch (Type) {
+		uint32_t GetComponentCount() const
+		{
+			switch (Type)
+			{
 				case ShaderDataType::Bool:		return 1;
 				case ShaderDataType::Int:		return 1;
 				case ShaderDataType::Int2:		return 2;
@@ -53,11 +59,12 @@ namespace Quiet {
 		}
 	};
 
-	class BufferLayout {
+	class BufferLayout
+	{
 	public:
 		BufferLayout() {}
 
-		BufferLayout(const std::initializer_list<BufferElement>& elements) : 
+		BufferLayout(const std::initializer_list<BufferElement>& elements) :
 			m_Elements(elements) 
 		{
 			CalculateOffsetsAndStride();
@@ -72,10 +79,12 @@ namespace Quiet {
 		std::vector<BufferElement>::const_iterator end() const { return m_Elements.end(); }
 
 	private:
-		void CalculateOffsetsAndStride() {
+		void CalculateOffsetsAndStride()
+		{
 			size_t offset = 0;
 			m_Stride = 0;
-			for (auto& element : m_Elements) {
+			for (auto& element : m_Elements)
+			{
 				element.Offset = offset;
 				offset += element.Size;
 				m_Stride += element.Size;
@@ -87,7 +96,8 @@ namespace Quiet {
 		uint32_t m_Stride = 0;
 	};
 
-	class VertexBuffer {
+	class VertexBuffer
+	{
 	public:
 		virtual ~VertexBuffer() = default;
 
@@ -100,7 +110,8 @@ namespace Quiet {
 		static Ref<VertexBuffer> Create(float* vertices, uint32_t size);
 	};
 
-	class IndexBuffer {
+	class IndexBuffer
+	{
 	public:
 		virtual ~IndexBuffer() = default;
 		

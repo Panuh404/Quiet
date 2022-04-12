@@ -4,28 +4,33 @@
 
 #include <glad/glad.h>
 
-namespace Quiet {
+namespace Quiet 
+{
 	///////////////////
 	// Vertex Buffer //
 	///////////////////
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)  {
+	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
+	{
 		QUIET_PROFILE_FUNCTION();
 		glCreateBuffers(1, &m_RendererID);
 		OpenGLVertexBuffer::Bind();
 		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 	}
 
-	OpenGLVertexBuffer::~OpenGLVertexBuffer() {
+	OpenGLVertexBuffer::~OpenGLVertexBuffer()
+	{
 		QUIET_PROFILE_FUNCTION();		
 		glDeleteBuffers(1, &m_RendererID);
 	}
 
-	void OpenGLVertexBuffer::Bind() const {
+	void OpenGLVertexBuffer::Bind() const
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 	}
 
-	void OpenGLVertexBuffer::Unbind() const {
+	void OpenGLVertexBuffer::Unbind() const
+	{
 		QUIET_PROFILE_FUNCTION();		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
@@ -42,17 +47,20 @@ namespace Quiet {
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 	}
 
-	OpenGLIndexBuffer::~OpenGLIndexBuffer() {
+	OpenGLIndexBuffer::~OpenGLIndexBuffer()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glDeleteBuffers(1, &m_RendererID);
 	}
 
-	void OpenGLIndexBuffer::Bind() const {
+	void OpenGLIndexBuffer::Bind() const
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 	}
 
-	void OpenGLIndexBuffer::Unbind() const {
+	void OpenGLIndexBuffer::Unbind() const
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}

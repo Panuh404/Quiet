@@ -31,9 +31,9 @@ void Sandbox2D::OnUpdate(Quiet::Timestep deltaTime) {
 	{
 		QUIET_PROFILE_SCOPE("Renderer Draw");
 		Quiet::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		Quiet::Renderer2D::DrawQuad({  0.5f, -0.5f }, { 0.5f, 0.75f }, { m_SquareColor1 });
+		Quiet::Renderer2D::DrawQuadRotated({  0.5f, -0.5f }, { 0.5f, 0.75f },glm::radians(-45.0f), { m_SquareColor1 });
 		Quiet::Renderer2D::DrawQuad({ -1.0f,  0.0f }, { 0.8f, 0.8f  }, { m_SquareColor2 });
-		Quiet::Renderer2D::DrawQuad({  0.0f,  0.0f, -0.1f }, { 5.0f, 5.0f }, m_Texture);
+		Quiet::Renderer2D::DrawQuad({  0.0f,  0.0f, -0.1f }, { 5.0f, 5.0f }, m_Texture, 10.0f);
 		Quiet::Renderer2D::EndScene();
 	}
 }

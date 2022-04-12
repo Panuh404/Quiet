@@ -4,14 +4,14 @@
 #include "Quiet/Core/Input.h"
 #include "Quiet/Renderer/Renderer.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
-namespace Quiet {
-	
+namespace Quiet
+{
 	Application* Application::s_Instance = nullptr;
 
-
-	Application::Application() {
+	Application::Application()
+	{
 		QUIET_PROFILE_FUNCTION();
 		QUIET_ASSERT(!s_Instance, "Application already exist!");
 		s_Instance = this;
@@ -25,44 +25,51 @@ namespace Quiet {
 		PushOverlay(m_ImGuiLayer);
 	}
 	
-	Application::~Application()	{
+	Application::~Application()
+	{
 		QUIET_PROFILE_FUNCTION();
 		Renderer::Shutdown();
 	}
 
-	void Application::PushLayer(Layer* layer) {
+	void Application::PushLayer(Layer* layer)
+	{
 		QUIET_PROFILE_FUNCTION();
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 	
-	void Application::PushOverlay(Layer* overlay) {
+	void Application::PushOverlay(Layer* overlay)
+	{
 		QUIET_PROFILE_FUNCTION();
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 	
-	void Application::OnEvent(Event& event) {
+	void Application::OnEvent(Event& event)
+	{
 		QUIET_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(QUIET_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(QUIET_BIND_EVENT_FN(Application::OnWindowResize));
 		
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
-			(*--it)->OnEvent(event);
-			if (event.m_Handled)
-				break;
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
+		{
+			(*it)->OnEvent(event);
+			if (event.m_Handled) break;
 		}
 	}
 	
-	bool Application::OnWindowClose(WindowCloseEvent& event) {
+	bool Application::OnWindowClose(WindowCloseEvent& event)
+	{
 		m_Running = false;
 		return true;
 	}
 
-	bool Application::OnWindowResize(WindowResizeEvent& event) {
+	bool Application::OnWindowResize(WindowResizeEvent& event)
+	{
 		QUIET_PROFILE_FUNCTION();
-		if (event.GetWidth() == 0 || event.GetHeight() == 0) {
+		if (event.GetWidth() == 0 || event.GetHeight() == 0)
+		{
 			m_Minimized = true;
 			return false;
 		}
@@ -71,25 +78,28 @@ namespace Quiet {
 		return false;
 	}
 	
-	void Application::Run() {
+	void Application::Run()
+	{
 		QUIET_PROFILE_FUNCTION();
-		while (m_Running) {
+		while (m_Running)
+		{
 			QUIET_PROFILE_SCOPE("RunLoop");
 			float time = glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 			
-			if (!m_Minimized) {
+			if (!m_Minimized)
+			{
 				QUIET_PROFILE_SCOPE("LayerStack::OnUpdate");
-				for (Layer* layer : m_LayerStack) 
-					layer->OnUpdate(timestep); 
+				for (Layer* layer : m_LayerStack)
+					layer->OnUpdate(timestep);
 			}
 			
 			m_ImGuiLayer->Begin();
 			{
 				QUIET_PROFILE_SCOPE("LayerStack::OnImGuiRender");
-				for (Layer* layer : m_LayerStack) 
-					layer->OnImGuiRender(); 
+				for (Layer* layer : m_LayerStack)
+					layer->OnImGuiRender();
 			}
 			m_ImGuiLayer->End();
 			m_Window->OnUpdate();

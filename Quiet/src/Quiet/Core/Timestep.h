@@ -1,9 +1,9 @@
 #pragma once
 
-namespace Quiet {
-
-	class Timestep {
-		
+namespace Quiet
+{
+	class Timestep
+	{
 	public:
 		Timestep(float Time = 0.0f) : m_Time(Time) {}
 
@@ -11,7 +11,7 @@ namespace Quiet {
 		
 		float GetSeconds() const { return m_Time; }
 		float GetMilliseconds() const { return m_Time * 1000.0f; }
-		
+
 	private:
 		float m_Time;
 	};

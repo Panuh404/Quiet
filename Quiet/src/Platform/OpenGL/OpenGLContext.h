@@ -4,9 +4,10 @@
 
 struct GLFWwindow;
 
-namespace Quiet {
-	
-	class OpenGLContext : public GraphicsContext {
+namespace Quiet
+{
+	class OpenGLContext : public GraphicsContext
+	{
 	public:
 		OpenGLContext(GLFWwindow* windowHandle);
 		

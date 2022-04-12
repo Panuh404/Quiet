@@ -2,9 +2,10 @@
 
 #include "Quiet/Renderer/VertexArray.h"
 
-namespace Quiet {
-	
-	class OpenGLVertexArray : public VertexArray {
+namespace Quiet
+{	
+	class OpenGLVertexArray : public VertexArray
+	{
 	public:
 		OpenGLVertexArray();
 		virtual ~OpenGLVertexArray();
@@ -22,6 +23,5 @@ namespace Quiet {
 		uint32_t m_RendererID;
 		std::vector<Ref<VertexBuffer>> m_VertexBuffers;
 		Ref<IndexBuffer> m_IndexBuffer;
-
 	};
 }

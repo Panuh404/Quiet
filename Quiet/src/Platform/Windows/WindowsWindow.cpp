@@ -1,15 +1,16 @@
 #include "Quiet_pch.h"
 
 #include "Platform/Windows/WindowsWindow.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
+#include "Quiet/Core/Input.h"
+#include "Quiet/Renderer/Renderer.h"
 #include "Quiet/Events/ApplicationEvent.h"
 #include "Quiet/Events/MouseEvent.h"
 #include "Quiet/Events/KeyEvent.h"
 
-#include "Platform/OpenGL/OpenGLContext.h"
-
-namespace Quiet {
-
+namespace Quiet
+{
 	static uint32_t s_GLFWWindowCount = 0;
 	
 	static void GLFWErrorCallback(int error, const char* description)
@@ -51,6 +52,10 @@ namespace Quiet {
 		
 		{
 			QUIET_PROFILE_SCOPE("glfwCreateWindow");
+			#if defined(QUIET_DEBUG)
+			if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
+				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+			#endif
 			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 			++s_GLFWWindowCount;
 		}
@@ -81,19 +86,23 @@ namespace Quiet {
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-			switch (action) {
-				case GLFW_PRESS: {
-					KeyPressedEvent event(key, 0);
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					KeyPressedEvent event(static_cast<KeyCode>(key), 0);
 					data.EventCallback(event);
 					break;
 				}
-				case GLFW_RELEASE: {
-					KeyReleasedEvent event(key);
+				case GLFW_RELEASE:
+				{
+					KeyReleasedEvent event(static_cast<KeyCode>(key));
 					data.EventCallback(event);
 					break;
 				}
-				case GLFW_REPEAT: {
-					KeyPressedEvent event(key, 1);
+				case GLFW_REPEAT:
+				{
+					KeyPressedEvent event(static_cast<KeyCode>(key), 1);
 					data.EventCallback(event);
 					break;
 				}
@@ -103,60 +112,68 @@ namespace Quiet {
 		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-			KeyTypedEvent event(keycode);
+			KeyTypedEvent event(static_cast<KeyCode>(keycode));
 			data.EventCallback(event);
 		});
 		
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-			switch (action) {
-			case GLFW_PRESS: {
-				MouseButtonPressedEvent event(button);
-				data.EventCallback(event);
-				break;
-			}
-			case GLFW_RELEASE: {
-				MouseButtonReleasedEvent event(button);
-				data.EventCallback(event);
-				break;
-			}
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					MouseButtonPressedEvent event(static_cast<MouseCode>(button));
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					MouseButtonReleasedEvent event(static_cast<MouseCode>(button));
+					data.EventCallback(event);
+					break;
+				}
 			}
 			});
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
+		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			MouseScrolledEvent event((float)xOffset, (float)yOffset);
 			data.EventCallback(event);
-			});
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
+		});
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
+		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			MouseMovedEvent event((float)xPos, (float)yPos);
 			data.EventCallback(event);
-			});
+		});
 	}
 
-	void WindowsWindow::Shutdown() {
+	void WindowsWindow::Shutdown()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_Window);
 		--s_GLFWWindowCount;
-		if (s_GLFWWindowCount == 0) 
-			glfwTerminate();
+		if (s_GLFWWindowCount == 0) glfwTerminate();
 	}
 
-	void WindowsWindow::OnUpdate() {
-		QUIET_PROFILE_FUNCTION();		
+	void WindowsWindow::OnUpdate()
+	{
+		QUIET_PROFILE_FUNCTION();
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
-	void WindowsWindow::SetVSync(bool enabled) {
+	void WindowsWindow::SetVSync(bool enabled)
+	{
 		QUIET_PROFILE_FUNCTION();
 		if (enabled) glfwSwapInterval(1);
 		else glfwSwapInterval(0);
 		m_Data.VSync = enabled;
 	}
 
-	bool WindowsWindow::IsVSync() const {
+	bool WindowsWindow::IsVSync() const
+	{
 		return m_Data.VSync;
 	}
 }

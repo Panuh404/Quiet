@@ -2,12 +2,14 @@
 
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
-namespace Quiet {
-
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
-		switch (type) {
+namespace Quiet
+{
+	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+	{
+		switch (type)
+		{
 		case ShaderDataType::Bool:		return GL_BOOL;
 		case ShaderDataType::Int:		return GL_INT;
 		case ShaderDataType::Int2:		return GL_INT;
@@ -24,27 +26,32 @@ namespace Quiet {
 		return 0;
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray() {
+	OpenGLVertexArray::OpenGLVertexArray()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glCreateVertexArrays(1, &m_RendererID);
 	}
 
-	OpenGLVertexArray::~OpenGLVertexArray() {
+	OpenGLVertexArray::~OpenGLVertexArray()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
-	void OpenGLVertexArray::Bind() const {
+	void OpenGLVertexArray::Bind() const
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindVertexArray(m_RendererID);
 	}
 
-	void OpenGLVertexArray::Unbind() const {
+	void OpenGLVertexArray::Unbind() const
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
+	{
 		QUIET_PROFILE_FUNCTION();
 		QUIET_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 		glBindVertexArray(m_RendererID);
@@ -52,24 +59,25 @@ namespace Quiet {
 
 		uint32_t index = 0;
 		const auto& layout = vertexBuffer->GetLayout();
-		for (const auto& element : layout) {
+		for (const auto& element : layout)
+		{
 			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, 
-				element.GetComponentCount(), 
-				ShaderDataTypeToOpenGLBaseType(element.Type), 
-				element.Normalized ? GL_TRUE : GL_FALSE, 
-				layout.GetStride(), 
+			glVertexAttribPointer(index,
+				element.GetComponentCount(),
+				ShaderDataTypeToOpenGLBaseType(element.Type),
+				element.Normalized ? GL_TRUE : GL_FALSE,
+				layout.GetStride(),
 				(const void*)element.Offset);
 			index++;
 		}
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) {
+	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 		m_IndexBuffer = indexBuffer;
 	}
-
 }

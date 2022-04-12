@@ -5,8 +5,8 @@
 
 extern Quiet::Application* Quiet::CreateApplication();
 
-int main(int argc, char** argv) {
-	
+int main(int argc, char** argv)
+{
 	Quiet::Log::Init();
 	
 	QUIET_PROFILE_BEGIN_SESSION("Startup", "QuietProfile-Startup.json");

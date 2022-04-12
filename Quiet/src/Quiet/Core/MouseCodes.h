@@ -2,9 +2,10 @@
 
 namespace Quiet {
 	using MouseCode = uint16_t;
-
-	namespace Mouse {
-		enum : MouseCode {
+	namespace Mouse
+	{
+		enum : MouseCode
+		{
 			// From glfw3.h
 			Button0 = 0,
 			Button1 = 1,

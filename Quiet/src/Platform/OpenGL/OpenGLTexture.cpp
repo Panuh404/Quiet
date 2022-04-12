@@ -4,9 +4,10 @@
 
 #include <stb_image.h>
 
-namespace Quiet {
+namespace Quiet
+{
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height):
-		m_Width(width), m_Height(height) 
+		m_Width(width), m_Height(height)
 	{
 		QUIET_PROFILE_FUNCTION();
 		m_InternalFormat = GL_RGBA8;
@@ -14,16 +15,18 @@ namespace Quiet {
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
+
 		// Texture Filtering Parameters
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 		// Texture Wraping Parameters
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path) :
-		m_Path(path) 
+		m_Path(path)
 	{
 		QUIET_PROFILE_FUNCTION();
 		int width, height, channels;
@@ -35,16 +38,18 @@ namespace Quiet {
 		}
 		QUIET_CORE_ASSERT(data, "Failed to load image!");
 		m_Width = width;
-		m_Height = height;		
+		m_Height = height;
 		m_Channels = channels;
 		
 		GLenum internalFormat = 0;
 		GLenum dataFormat = 0;
-		if (m_Channels == 4){
+		if (m_Channels == 4)
+		{
 			internalFormat = GL_RGBA8;
 			dataFormat = GL_RGBA;
 		}
-		else if (m_Channels == 3) {
+		else if (m_Channels == 3)
+		{
 			internalFormat = GL_RGB8;
 			dataFormat = GL_RGB;
 		}
@@ -54,33 +59,40 @@ namespace Quiet {
 		
 		QUIET_CORE_ASSERT(internalFormat && dataFormat, "Unsupported format!");
 		// Create Texture
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID); 
-		glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height); 
+		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+		glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
+		
 		// Texture Filtering Parameters
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		
 		// Texture Wraping Parameters
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		
 		// Uploading the image data to the GPU
-		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data); 
+		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
+		
 		// Free the memory
-		stbi_image_free(data); 
+		stbi_image_free(data);
 	}
 
-	OpenGLTexture2D::~OpenGLTexture2D() {
+	OpenGLTexture2D::~OpenGLTexture2D()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glDeleteTextures(1, &m_RendererID);
 	}
 
-	void OpenGLTexture2D::SetData(void* data, uint32_t size) {
+	void OpenGLTexture2D::SetData(void* data, uint32_t size)
+	{
 		QUIET_PROFILE_FUNCTION();
 		uint32_t BytesPerChannel = m_DataFormat == GL_RGBA ? 4 : 3;
 		QUIET_CORE_ASSERT(size == m_Width * m_Height * BytesPerChannel, "Data must be entire texture!");
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 	
-	void OpenGLTexture2D::Bind(uint32_t slot) const {
+	void OpenGLTexture2D::Bind(uint32_t slot) const
+	{
 		QUIET_PROFILE_FUNCTION();
 		glBindTextureUnit(slot, m_RendererID);
 	}

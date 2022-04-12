@@ -7,33 +7,38 @@
 
 #include <thread>
 
-namespace Quiet {
-	struct ProfileResult {
+namespace Quiet
+{
+	struct ProfileResult
+	{
 		std::string Name;
 		long long Start, End;
 		uint32_t ThreadID;
 	};
 
-	struct InstrumentationSession {
+	struct InstrumentationSession
+	{
 		std::string Name;
 	};
 
-	class Instrumentor {
+	class Instrumentor
+	{
 	private:
 		InstrumentationSession* m_CurrentSession;
 		std::ofstream m_OutputStream;
 		int m_ProfileCount;
 	public:
-		Instrumentor() : m_CurrentSession(nullptr), m_ProfileCount(0) {
-		}
+		Instrumentor() : m_CurrentSession(nullptr), m_ProfileCount(0) {}
 
-		void BeginSession(const std::string& name, const std::string& filepath = "results.json") {
+		void BeginSession(const std::string& name, const std::string& filepath = "results.json")
+		{
 			m_OutputStream.open(filepath);
 			WriteHeader();
 			m_CurrentSession = new InstrumentationSession{ name };
 		}
 
-		void EndSession() {
+		void EndSession()
+		{
 			WriteFooter();
 			m_OutputStream.close();
 			delete m_CurrentSession;
@@ -41,9 +46,9 @@ namespace Quiet {
 			m_ProfileCount = 0;
 		}
 
-		void WriteProfile(const ProfileResult& result) {
-			if (m_ProfileCount++ > 0)
-				m_OutputStream << ",";
+		void WriteProfile(const ProfileResult& result)
+		{
+			if (m_ProfileCount++ > 0) m_OutputStream << ",";
 
 			std::string name = result.Name;
 			std::replace(name.begin(), name.end(), '"', '\'');
@@ -57,40 +62,44 @@ namespace Quiet {
 			m_OutputStream << "\"tid\":" << result.ThreadID << ",";
 			m_OutputStream << "\"ts\":" << result.Start;
 			m_OutputStream << "}";
-
 			m_OutputStream.flush();
 		}
 
-		void WriteHeader() {
+		void WriteHeader()
+		{
 			m_OutputStream << "{\"otherData\": {},\"traceEvents\":[";
 			m_OutputStream.flush();
 		}
 
-		void WriteFooter() {
+		void WriteFooter()
+		{
 			m_OutputStream << "]}";
 			m_OutputStream.flush();
 		}
 
-		static Instrumentor& Get() {
+		static Instrumentor& Get()
+		{
 			static Instrumentor instance;
 			return instance;
 		}
 	};
 
-	class InstrumentationTimer {
+	class InstrumentationTimer
+	{
 	public:
-		InstrumentationTimer(const char* name) : m_Name(name), m_Stopped(false)	{
+		InstrumentationTimer(const char* name) : m_Name(name), m_Stopped(false)
+		{
 			m_StartTimepoint = std::chrono::high_resolution_clock::now();
 		}
 
-		~InstrumentationTimer()	{
+		~InstrumentationTimer()
+		{
 			if (!m_Stopped)
 				Stop();
 		}
 
 		void Stop()	{
 			auto endTimepoint = std::chrono::high_resolution_clock::now();
-
 			long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
 			long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 

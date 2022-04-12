@@ -11,12 +11,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-namespace Quiet {
+namespace Quiet
+{
+	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
+	ImGuiLayer::~ImGuiLayer() {}
 	
-	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") { } 
-	ImGuiLayer::~ImGuiLayer() { }
-	
-	void ImGuiLayer::OnAttach() {
+	void ImGuiLayer::OnAttach()
+	{
 		QUIET_PROFILE_FUNCTION();
 		// Setup Dear ImGui Context
 		IMGUI_CHECKVERSION();
@@ -34,7 +35,8 @@ namespace Quiet {
 		
 		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
 		ImGuiStyle& style = ImGui::GetStyle();
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
@@ -47,21 +49,24 @@ namespace Quiet {
 		ImGui_ImplOpenGL3_Init("#version 410 core");
 	}
 	
-	void ImGuiLayer::OnDetach() {
+	void ImGuiLayer::OnDetach()
+	{
 		QUIET_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
 	}
 	
-	void ImGuiLayer::Begin() {
+	void ImGuiLayer::Begin()
+	{
 		QUIET_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
 	
-	void ImGuiLayer::End() {
+	void ImGuiLayer::End()
+	{
 		QUIET_PROFILE_FUNCTION();
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
@@ -72,7 +77,8 @@ namespace Quiet {
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
 			GLFWwindow* backup_current_context = glfwGetCurrentContext();
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();

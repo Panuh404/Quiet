@@ -3,19 +3,21 @@
 #include "Quiet/Core/Core.h"
 #include "Quiet/Events/Event.h"
 
-namespace Quiet {
-	
-	struct WindowProps {
+namespace Quiet
+{
+	struct WindowProps
+	{
 		std::string Title;
 		unsigned int Width;
 		unsigned int Height;
 
-		WindowProps(const std::string& title = "Quiet Engine", unsigned int width = 1280, unsigned int height = 720) : 
+		WindowProps(const std::string& title = "Quiet Engine", unsigned int width = 1280, unsigned int height = 720) :
 			Title(title), Width(width), Height(height) {}
 	};
 	
 	// Interface representing a desktop system based Window
-	class Window {
+	class Window
+	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
 
@@ -30,7 +32,6 @@ namespace Quiet {
 		virtual bool IsVSync() const = 0;
 
 		virtual void* GetNativeWindow() const = 0;
-		
 		static Scope<Window> Create(const WindowProps& props = WindowProps());
 	};
 }

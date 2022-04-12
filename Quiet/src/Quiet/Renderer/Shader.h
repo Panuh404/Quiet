@@ -4,9 +4,10 @@
 
 #include "glm/glm.hpp"
 
-namespace Quiet {
-
-	class Shader {
+namespace Quiet
+{
+	class Shader
+	{
 	private:
 		uint32_t m_RendererID;
 
@@ -30,7 +31,8 @@ namespace Quiet {
 		static Ref<Shader>Create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
 	};
 
-	class ShaderLibrary {
+	class ShaderLibrary
+	{
 	public:
 		void Add(const Ref<Shader>& shader);
 		void Add(const std::string& name, const Ref<Shader>& shader);

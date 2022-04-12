@@ -4,9 +4,10 @@
 #include "Quiet/Core/Timestep.h"
 #include "Quiet/Events/Event.h"
 
-namespace Quiet {
-
-	class Layer {
+namespace Quiet
+{
+	class Layer
+	{
 	public:
 		Layer(const std::string& name = "Layer");
 		virtual ~Layer();
@@ -18,8 +19,8 @@ namespace Quiet {
 		virtual void OnEvent(Event& event) {}
 
 		inline const std::string& GetName() const { return m_DebugName; }
+		
 	protected:
 		std::string m_DebugName;
 	};
 }
-

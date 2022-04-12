@@ -2,6 +2,7 @@
 
 #include "Quiet/Renderer/RenderCommand.h"
 
-namespace Quiet {
+namespace Quiet
+{
 	Scope<RendererAPI> RenderCommand::s_RendererAPI = RendererAPI::Create();
 }

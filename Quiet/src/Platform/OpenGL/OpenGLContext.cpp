@@ -4,16 +4,16 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-namespace Quiet {
-	
+namespace Quiet
+{
 	OpenGLContext::OpenGLContext(GLFWwindow* windowsHandle) :
 		m_WindowHandle(windowsHandle)
 	{
 		QUIET_CORE_ASSERT(windowsHandle, "Window handle is null!");
-		
 	}
 	
-	void OpenGLContext::Init() {
+	void OpenGLContext::Init()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -35,7 +35,8 @@ namespace Quiet {
 #endif
 	}
 
-	void OpenGLContext::SwapBuffers() {
+	void OpenGLContext::SwapBuffers()
+	{
 		QUIET_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}

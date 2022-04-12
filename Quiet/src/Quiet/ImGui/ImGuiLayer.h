@@ -6,9 +6,10 @@
 #include "Quiet/Events/KeyEvent.h"
 #include "Quiet/Events/ApplicationEvent.h"
 
-namespace Quiet {
-	
-	class ImGuiLayer : public Layer {
+namespace Quiet
+{
+	class ImGuiLayer : public Layer
+	{
 	public:
 		ImGuiLayer();
 		~ImGuiLayer();
@@ -18,7 +19,7 @@ namespace Quiet {
 		
 		void Begin();
 		void End();
-		
+
 	private:
 		float m_Time = 0.0f;
 	};

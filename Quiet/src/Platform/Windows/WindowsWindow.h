@@ -5,9 +5,10 @@
 
 #include <GLFW/glfw3.h>
 
-namespace Quiet {
-	
-	class WindowsWindow : public Window {
+namespace Quiet
+{
+	class WindowsWindow : public Window
+	{
 	public:
 		WindowsWindow(const WindowProps& props);
 		virtual ~WindowsWindow();
@@ -23,7 +24,6 @@ namespace Quiet {
 		bool IsVSync() const override;
 
 		inline virtual void* GetNativeWindow() const { return m_Window; }
-
 		
 	private:
 		virtual void Init(const WindowProps& props);
@@ -33,14 +33,14 @@ namespace Quiet {
 		GLFWwindow* m_Window;
 		Scope<GraphicsContext> m_Context;
 
-		struct WindowData {
+		struct WindowData
+		{
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
 
 			EventCallbackFn EventCallback;
 		};
-
 		WindowData m_Data;
 	};
 }

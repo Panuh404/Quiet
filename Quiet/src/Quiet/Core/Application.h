@@ -14,10 +14,10 @@
 #include "Quiet/Renderer/VertexArray.h"
 #include "Quiet/Renderer/OrthographicCamera.h"
 
-
-namespace Quiet {
-	
-	class Application {
+namespace Quiet
+{
+	class Application
+	{
 	public:
 		Application();
 		virtual ~Application();
@@ -31,10 +31,6 @@ namespace Quiet {
 		inline static Application& Get() { return *s_Instance; }
 		
 	private:
-		bool OnWindowClose(WindowCloseEvent& event);
-		bool OnWindowResize(WindowResizeEvent& event);
-		
-	private:
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
@@ -43,9 +39,11 @@ namespace Quiet {
 		float m_LastFrameTime = 0.0f;
 		
 		static Application* s_Instance;
+
+	private:
+		bool OnWindowClose(WindowCloseEvent& event);
+		bool OnWindowResize(WindowResizeEvent& event);
 	};
-	
 	// To be defined in client
 	Application* CreateApplication();
 }
-

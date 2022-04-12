@@ -1,11 +1,13 @@
 #pragma once
-#include <memory>
 
 #include "Quiet/Renderer/Buffer.h"
 
-namespace Quiet {
-	
-	class VertexArray {
+#include <memory> 
+
+namespace Quiet
+{	
+	class VertexArray
+	{
 	public:
 		virtual ~VertexArray() {}
 		

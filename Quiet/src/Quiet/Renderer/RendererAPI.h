@@ -1,17 +1,17 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include "Quiet/Renderer/VertexArray.h"
 
-namespace Quiet {
-	class RendererAPI {
+#include <glm/glm.hpp>
+
+namespace Quiet
+{
+	class RendererAPI
+	{
 	public:
-		enum class API {
-			None = 0,
-			OpenGL = 1,
-			Vulkan = 2,
-			Direct3D = 3
+		enum class API
+		{
+			None = 0, OpenGL = 1, Vulkan = 2, Direct3D = 3
 		};
 
 	public:
