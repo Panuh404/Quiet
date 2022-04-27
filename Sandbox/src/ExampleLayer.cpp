@@ -12,8 +12,7 @@ ExampleLayer::ExampleLayer() : Layer("Example"), m_CameraController(1280.0f / 72
 		 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
 		 0.0f,  0.5f, 0.0f, 0.8f, 0.7f, 0.2f, 1.0f
 	};
-	Quiet::Ref<Quiet::VertexBuffer> triangleVB;
-	triangleVB = Quiet::VertexBuffer::Create(tVertices, sizeof(tVertices));
+	Quiet::Ref<Quiet::VertexBuffer> triangleVB = Quiet::VertexBuffer::Create(tVertices, sizeof(tVertices));
 
 	triangleVB->SetLayout({
 		{ Quiet::ShaderDataType::Float3, "a_Position" },
@@ -22,8 +21,7 @@ ExampleLayer::ExampleLayer() : Layer("Example"), m_CameraController(1280.0f / 72
 	m_TriangleVA->AddVertexBuffer(triangleVB);
 
 	uint32_t tIndices[3] = { 0, 1, 2 };
-	Quiet::Ref<Quiet::IndexBuffer> triangleIB;
-	triangleIB = Quiet::IndexBuffer::Create(tIndices, sizeof(tIndices) / sizeof(uint32_t));
+	Quiet::Ref<Quiet::IndexBuffer> triangleIB = Quiet::IndexBuffer::Create(tIndices, sizeof(tIndices) / sizeof(uint32_t));
 	m_TriangleVA->SetIndexBuffer(triangleIB);
 
 	m_SquareVA = Quiet::VertexArray::Create();

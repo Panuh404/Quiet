@@ -150,7 +150,7 @@ namespace Quiet
 	};
 }
 
-#define QUIET_PROFILE 1
+#define QUIET_PROFILE 0
 #if QUIET_PROFILE
 
 	// Resolve which function signature macro will be used. Note that this only
