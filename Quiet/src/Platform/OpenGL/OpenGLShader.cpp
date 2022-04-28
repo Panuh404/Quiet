@@ -179,13 +179,14 @@ namespace Quiet
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::SetInt(const std::string& name, const int& value)			{ QUIET_PROFILE_FUNCTION(); UploadUniformInt(name, value);	   }
-	void OpenGLShader::SetFloat(const std::string& name, const float& values)		{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat(name, values);  }
-	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& values)	{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat2(name, values); }
-	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& values)	{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat3(name, values); }
-	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& values)	{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat4(name, values); }
-	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)	{ QUIET_PROFILE_FUNCTION(); UploadUniformMat3(name, matrix);   }
-	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)	{ QUIET_PROFILE_FUNCTION(); UploadUniformMat4(name, matrix);   }
+	void OpenGLShader::SetInt(const std::string& name, int value)						{ QUIET_PROFILE_FUNCTION(); UploadUniformInt(name, value);				}
+	void OpenGLShader::SetIntArr(const std::string& name, int* values, uint32_t count)	{ QUIET_PROFILE_FUNCTION(); UploadUniformIntArr(name, values, count);	}
+	void OpenGLShader::SetFloat(const std::string& name, float values)					{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat(name, values);			}
+	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& values)		{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat2(name, values);			}
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& values)		{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat3(name, values);			}
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& values)		{ QUIET_PROFILE_FUNCTION(); UploadUniformFloat4(name, values);			}
+	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)		{ QUIET_PROFILE_FUNCTION(); UploadUniformMat3(name, matrix);			}
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)		{ QUIET_PROFILE_FUNCTION(); UploadUniformMat4(name, matrix);			}
 
 	
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
@@ -193,11 +194,19 @@ namespace Quiet
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, value);
 	}
-	void OpenGLShader::UploadUniformFloat(const std::string& name, const float& value)
+
+	void OpenGLShader::UploadUniformIntArr(const std::string& name, int* values, uint32_t count)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform1iv(location, count, values);
+	}
+
+	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1f(location, value);
 	}
+
 	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
@@ -208,19 +217,23 @@ namespace Quiet
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform3f(location, values.r, values.g, values.b);
 	}
+
 	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform4f(location, values.r, values.g, values.b, values.a);
 	}
+
 	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
 	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
 }

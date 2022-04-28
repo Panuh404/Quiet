@@ -29,14 +29,16 @@ void Sandbox2D::OnUpdate(Quiet::Timestep deltaTime) {
 	}
 	// Draw
 	{
+		static float rotation = 0.0f;
+		rotation += deltaTime * 20.0f;
+
 		QUIET_PROFILE_SCOPE("Renderer Draw");
 		Quiet::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		//Quiet::Renderer2D::DrawQuadRotated({  0.5f, -0.5f }, { 0.5f, 0.75f },glm::radians(-45.0f), { m_SquareColor1 });
-		//Quiet::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-		//Quiet::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
 		Quiet::Renderer2D::DrawQuad({  0.5f, -0.5f }, { 0.5f, 0.75f }, { m_SquareColor1 });
 		Quiet::Renderer2D::DrawQuad({ -1.0f,  0.0f }, { 0.8f, 0.8f  }, { m_SquareColor2 });
-		//Quiet::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_Texture, 10.0f);
+		Quiet::Renderer2D::DrawQuadRotated({  1.5f, -0.5f }, { 0.5f, 0.75f }, rotation, { m_SquareColor3 });
+		Quiet::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_Texture, 10.0f);
+		Quiet::Renderer2D::DrawQuadRotated({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, m_Rotation1, m_Texture, 20.0f);
 		Quiet::Renderer2D::EndScene();
 	}
 }
@@ -45,9 +47,11 @@ void Sandbox2D::OnImGuiRender() {
 	QUIET_PROFILE_FUNCTION();
 	ImGui::Begin("Settings");
 	ImGui::Text("COLORS");
+	ImGui::SliderFloat("Rotation 1", &m_Rotation1, -360, 360);
+	ImGui::SliderFloat("Rotation 2", &m_Rotation2, -360, 360);
 	ImGui::ColorEdit4("Color 1", glm::value_ptr(m_SquareColor1));
 	ImGui::ColorEdit4("Color 2", glm::value_ptr(m_SquareColor2));
-
+	ImGui::ColorEdit4("Color 3", glm::value_ptr(m_SquareColor3));
 	ImGui::End();
 }
 
