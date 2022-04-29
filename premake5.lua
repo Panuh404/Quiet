@@ -71,8 +71,7 @@ project "Quiet"
 		systemversion "latest"
 
 		defines{
-			"QUIET_PLATFORM_WINDOWS",
-			"QUIET_BUILD_DLL"
+
 		}
 
 	filter "configurations:Debug"

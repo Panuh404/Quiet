@@ -9,6 +9,15 @@
 
 namespace Quiet
 {
+	struct OrthographicCameraBounds
+	{
+		float Left, Right;
+		float Bottom, Top;
+
+		float GetWidth() { return Right - Left; }
+		float GetHeight() { return Top - Bottom; }
+	};
+
 	class OrthographicCameraController
 	{
 	public:
@@ -22,6 +31,8 @@ namespace Quiet
 		
 		float GetZoomLevel() const { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
+
+		const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
 		
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& event);
@@ -29,10 +40,11 @@ namespace Quiet
 		
 	private:
 		float m_AspectRatio;
-		float m_ZoomLevel = 1.0f;
-		OrthographicCamera m_Camera;
 		float m_Rotation;
-		
+		float m_ZoomLevel = 1.0f;
+		OrthographicCameraBounds m_Bounds;
+		OrthographicCamera m_Camera;
+
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
 		float m_CameraRotation = 0.0f;
 		float m_CameraTranslationSpeed = 1.0f;

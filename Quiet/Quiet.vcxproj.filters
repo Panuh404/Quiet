@@ -19,6 +19,9 @@
     <Filter Include="src\Quiet\Core">
       <UniqueIdentifier>{9CE2B548-88B0-A94E-7144-1A755DB185B3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Quiet\Debug">
+      <UniqueIdentifier>{3A917E5F-A61C-EC23-AF2D-6F181B384824}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Quiet\Events">
       <UniqueIdentifier>{280BDB52-1404-FAA4-3D36-DF29298ED9B0}</UniqueIdentifier>
     </Filter>
@@ -114,6 +117,9 @@
     <ClInclude Include="src\Quiet\Core\Window.h">
       <Filter>src\Quiet\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quiet\Debug\Instrumentor.h">
+      <Filter>src\Quiet\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Quiet\Events\ApplicationEvent.h">
       <Filter>src\Quiet\Events</Filter>
     </ClInclude>
@@ -145,6 +151,9 @@
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\Renderer.h">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quiet\Renderer\Renderer2D.h">
       <Filter>src\Quiet\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Quiet\Renderer\RendererAPI.h">
@@ -1410,8 +1419,6 @@
     <ClInclude Include="vendor\stb\stb_image.h">
       <Filter>vendor\stb</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quiet\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\Quiet\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1441,6 +1448,9 @@
     <ClCompile Include="src\Quiet\Core\Application.cpp">
       <Filter>src\Quiet\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Quiet\Core\Input.cpp">
+      <Filter>src\Quiet\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Quiet\Core\Layer.cpp">
       <Filter>src\Quiet\Core</Filter>
     </ClCompile>
@@ -1450,6 +1460,9 @@
     <ClCompile Include="src\Quiet\Core\Log.cpp">
       <Filter>src\Quiet\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\Quiet\Core\Window.cpp">
+      <Filter>src\Quiet\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\Quiet\ImGui\ImGuiBuild.cpp">
       <Filter>src\Quiet\ImGui</Filter>
     </ClCompile>
@@ -1457,6 +1470,9 @@
       <Filter>src\Quiet\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\Buffer.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\GraphicsContext.cpp">
       <Filter>src\Quiet\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\OrthographicCamera.cpp">
@@ -1469,6 +1485,9 @@
       <Filter>src\Quiet\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\Renderer.cpp">
+      <Filter>src\Quiet\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quiet\Renderer\Renderer2D.cpp">
       <Filter>src\Quiet\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Quiet\Renderer\RendererAPI.cpp">
@@ -1489,9 +1508,5 @@
     <ClCompile Include="vendor\stb\stb_image.cpp">
       <Filter>vendor\stb</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quiet\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\Quiet\Renderer\GraphicsContext.cpp" />
-    <ClCompile Include="src\Quiet\Core\Input.cpp" />
-    <ClCompile Include="src\Quiet\Core\Window.cpp" />
   </ItemGroup>
 </Project>

@@ -47,6 +47,7 @@
 #endif
 // End Platform Detection
 
+
 // Dynamic Linking Support
 #ifdef QUIET_PLATFORM_WINDOWS
 	#if QUIET_DYNAMIC_LINK
@@ -63,14 +64,24 @@
 #endif
 
 
-// Error Asserting Handling
+// Debug Settings
 #ifdef QUIET_DEBUG
+	#if defined(QUIET_PLATFORM_WINDOWS)
+		#define QUIET_DEBUGBREAK() __debugbreak()
+	#elif defined(QUIET_PLATFORM_LINUX)
+		#define QUIET_DEBUGBREAK() raise(SIGTRAP)
+	#else
+		#error "Platform doesn't support debugbreak yet!"
+	#endif
 	#define QUIET_ENABLE_ASSERTS
+#else
+	#define QUIET_DEBUGBREAK()
 #endif
 
+
 #ifdef QUIET_ENABLE_ASSERTS
-	#define QUIET_ASSERT(x, ...)		{ if(!(x)) { QUIET_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define QUIET_CORE_ASSERT(x, ...)	{ if(!(x)) { QUIET_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define QUIET_ASSERT(x, ...)		{ if(!(x)) { QUIET_ERROR("Assertion Failed: {0}", __VA_ARGS__); QUIET_DEBUGBREAK(); } }
+	#define QUIET_CORE_ASSERT(x, ...)	{ if(!(x)) { QUIET_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); QUIET_DEBUGBREAK(); } }
 #else
 	#define QUIET_ASSERT(x, ...)
 	#define QUIET_CORE_ASSERT(x, ...)
