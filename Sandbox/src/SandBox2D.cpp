@@ -108,12 +108,15 @@ void Sandbox2D::OnImGuiRender() {
 		ImGui::ColorEdit4("Color 2", glm::value_ptr(m_SquareColor2));
 		ImGui::ColorEdit4("Color 3", glm::value_ptr(m_SquareColor3));
 		ImGui::Separator();
+		ImGui::Text("Tiles");
+		ImGui::Separator();
 		ImGui::Text("Renderer 2D Stats");
 		auto stats = Quiet::Renderer2D::GetStats();
 		ImGui::Text("-Draw Calls: %d", stats.DrawCalls);
 		ImGui::Text("-Quad Count: %d", stats.QuadCount);
 		ImGui::Text("-Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("-Indices: %d", stats.GetTotalIndexCount());
+
 
 	}
 	ImGui::End();
