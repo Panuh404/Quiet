@@ -175,6 +175,7 @@
     <ClInclude Include="src\Quiet\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Quiet\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Quiet\Renderer\Shader.h" />
+    <ClInclude Include="src\Quiet\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\Quiet\Renderer\Texture.h" />
     <ClInclude Include="src\Quiet\Renderer\VertexArray.h" />
     <ClInclude Include="src\Quiet_pch.h" />
@@ -621,6 +622,7 @@
     <ClCompile Include="src\Quiet\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Quiet\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Quiet\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Quiet\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\Quiet\Renderer\Texture.cpp" />
     <ClCompile Include="src\Quiet\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Quiet_pch.cpp">

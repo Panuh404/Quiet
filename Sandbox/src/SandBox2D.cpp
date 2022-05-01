@@ -9,9 +9,14 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 
 void Sandbox2D::OnAttach() {
 	QUIET_PROFILE_FUNCTION();
+	// Textures
 	m_CheckerboadTex = Quiet::Texture2D::Create("res/textures/Checkerboard.png");
 	m_SpriteSheet = Quiet::Texture2D::Create("res/game/textures/RPG_sheet.png");
-
+	// SubTextures
+	m_TextureStairs = Quiet::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7, 6 }, { 128,128 });
+	m_TextureBarrel = Quiet::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8, 2 }, { 128,128 });
+	m_TextureTree   = Quiet::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 1 }, { 128,128 }, {1,2});
+	// Particle system Stuff
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
 	m_Particle.ColorEnd = { 254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f };
 	m_Particle.SizeBegin = 0.5f, m_Particle.SizeVariation = 0.3f, m_Particle.SizeEnd = 0.0f;
@@ -90,7 +95,9 @@ void Sandbox2D::OnUpdate(Quiet::Timestep deltaTime) {
 
 		// Game Scene
 		Quiet::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		Quiet::Renderer2D::DrawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, m_SpriteSheet);
+		Quiet::Renderer2D::DrawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, m_TextureStairs);
+		Quiet::Renderer2D::DrawQuad({ 1.0f,0.0f,0.0f }, { 1.0f,1.0f }, m_TextureBarrel);
+		Quiet::Renderer2D::DrawQuad({ -1.0f,0.0f,0.0f }, { 1.0f,2.0f }, m_TextureTree);
 		Quiet::Renderer2D::EndScene();
 
 	}
@@ -116,8 +123,6 @@ void Sandbox2D::OnImGuiRender() {
 		ImGui::Text("-Quad Count: %d", stats.QuadCount);
 		ImGui::Text("-Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("-Indices: %d", stats.GetTotalIndexCount());
-
-
 	}
 	ImGui::End();
 }
