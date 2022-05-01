@@ -44,7 +44,12 @@ namespace Quiet
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
-	
+
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	void Application::OnEvent(Event& event)
 	{
 		QUIET_PROFILE_FUNCTION();

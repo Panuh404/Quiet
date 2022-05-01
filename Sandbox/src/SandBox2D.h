@@ -29,7 +29,6 @@ private:
 	Quiet::Ref<Quiet::SubTexture2D> m_TextureBarrel;
 	Quiet::Ref<Quiet::SubTexture2D> m_TextureTree;
 
-
 	float m_Rotation1 = -45.0f;
 	float m_Rotation2 = -75.0f;
 
